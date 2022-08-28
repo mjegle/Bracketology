@@ -1,0 +1,517 @@
+Seed,School,Berth,year
+1,Connecticut,Automatic,2014
+2,Duke,At-large,2014
+3,Texas A&M,At-large,2014
+4,Nebraska,Automatic,2014
+5,NC State,At-large,2014
+6,Gonzaga,Automatic,2014
+7,DePaul,Automatic,2014
+8,Georgia,At-large,2014
+9,St. Joseph's,At-large,2014
+10,Oklahoma,At-large,2014
+11,James Madison,Automatic,2014
+12,BYU,At-large,2014
+13,Fresno State,Automatic,2014
+14,North Dakota,Automatic,2014
+15,Winthrop,Automatic,2014
+16,Prairie View A&M,Automatic,2014
+1,South Carolina,At-large,2014
+2,Stanford,At-large,2014
+3,Penn State,At-large,2014
+4,North Carolina,At-large,2014
+5,Michigan State,At-large,2014
+6,Dayton,At-large,2014
+7,Iowa State,At-large,2014
+8,Middle Tennessee State,Automatic,2014
+9,Oregon State,At-large,2014
+10,Florida State,At-large,2014
+11,Florida,At-large,2014
+12,Hampton,Automatic,2014
+13,Tennessee-Martin,Automatic,2014
+14,Wichita State,Automatic,2014
+15,South Dakota,Automatic,2014
+16,Cal State Northridge,Automatic,2014
+1,Notre Dame,Automatic,2014
+2,Baylor,Automatic,2014
+3,Kentucky,At-large,2014
+4,Purdue,At-large,2014
+5,Oklahoma State,At-large,2014
+6,Syracuse,At-large,2014
+7,California,At-large,2014
+8,Vanderbilt,At-large,2014
+9,Arizona State,At-large,2014
+10,Fordham,Automatic,2014
+11,Chattanooga,Automatic,2014
+12,Florida Gulf Coast,Automatic,2014
+13,Akron,Automatic,2014
+14,Wright State,Automatic,2014
+15,Western Kentucky,Automatic,2014
+16,Robert Morris,Automatic,2014
+1,Tennessee,Automatic,2014
+2,West Virginia,At-large,2014
+3,Louisville,At-large,2014
+4,Maryland,At-large,2014
+5,Texas,At-large,2014
+6,Iowa,At-large,2014
+7,LSU,At-large,2014
+8,St. John's,At-large,2014
+9,USC,Automatic,2014
+10,Georgia Tech,At-large,2014
+11,Marist,Automatic,2014
+12,Penn,Automatic,2014
+13,Army,Automatic,2014
+14,Idaho,Automatic,2014
+15,Albany,Automatic,2014
+16,Northwestern State,Automatic,2014
+1,Connecticut,Automatic,2015
+2,Kentucky,At-large,2015
+3,Louisville,At-large,2015
+4,California,At-large,2015
+5,Texas,At-large,2015
+6,South Florida,At-large,2015
+7,Dayton,At-large,2015
+8,Rutgers,At-large,2015
+9,Seton Hall,At-large,2015
+10,Iowa State,At-large,2015
+11,LSU,At-large,2015
+12,Western Kentucky,Automatic,2015
+13,Wichita State,Automatic,2015
+14,BYU,Automatic,2015
+15,Tennessee State,Automatic,2015
+16,St. Francis Brooklyn,Automatic,2015
+1,Maryland,Automatic,2015
+2,Tennessee,At-large,2015
+3,Oregon State,At-large,2015
+4,Duke,At-large,2015
+5,Mississippi State,At-large,2015
+6,George Washington,Automatic,2015
+7,Chattanooga,Automatic,2015
+8,Princeton,Automatic,2015
+9,Green Bay,Automatic,2015
+10,Pittsburgh,At-large,2015
+11,Gonzaga,At-large,2015
+12,Tulane,At-large,2015
+13,Albany,Automatic,2015
+14,South Dakota State,Automatic,2015
+15,Boise State,Automatic,2015
+16,New Mexico State,Automatic,2015
+1,Notre Dame,Automatic,2015
+2,Baylor,Automatic,2015
+3,Iowa,At-large,2015
+4,Stanford,Automatic,2015
+5,Oklahoma,At-large,2015
+6,Washington,At-large,2015
+7,Northwestern,At-large,2015
+8,Minnesota,At-large,2015
+9,DePaul,Automatic,2015
+10,Arkansas,At-large,2015
+11,Miami (FL),At-large,2015
+12,Quinnipiac,Automatic,2015
+13,Cal State Northridge,Automatic,2015
+14,American,Automatic,2015
+15,Northwestern State,Automatic,2015
+16,Montana,Automatic,2015
+1,South Carolina,Automatic,2015
+2,Florida State,At-large,2015
+3,Arizona State,At-large,2015
+4,North Carolina,At-large,2015
+5,Ohio State,At-large,2015
+6,Texas A&M,At-large,2015
+7,Florida Gulf Coast,Automatic,2015
+8,Syracuse,At-large,2015
+9,Nebraska,At-large,2015
+10,Oklahoma State,At-large,2015
+11,Arkansas-Little Rock,Automatic,2015
+12,James Madison,Automatic,2015
+13,Liberty,Automatic,2015
+14,Ohio,Automatic,2015
+15,Alabama State,Automatic,2015
+16,Savannah State,Automatic,2015
+1,Connecticut,Auto,2016
+2,Texas,At-Large,2016
+3,UCLA,At-Large,2016
+4,Michigan State,At-Large,2016
+5,Mississippi State,At-Large,2016
+6,South Florida,At-Large,2016
+7,BYU,At-Large,2016
+8,Seton Hall,At-Large,2016
+9,Duquesne,At-Large,2016
+10,Missouri,At-Large,2016
+11,Colorado State,Auto,2016
+12,Chattanooga,Auto,2016
+13,Belmont,Auto,2016
+14,Hawaii,Auto,2016
+15,Alabama State,Auto,2016
+16,Robert Morris,Auto,2016
+1,Baylor,Auto,2016
+2,Oregon State,Auto,2016
+3,Louisville,At-Large,2016
+4,Texas A&M,At-Large,2016
+5,Florida State,At-Large,2016
+6,DePaul,At-Large,2016
+7,Oklahoma State,At-Large,2016
+8,St. John's,Auto,2016
+9,Auburn,At-Large,2016
+10,St. Bonaventure,At-Large,2016
+11,James Madison,Auto,2016
+12,Middle Tennessee,Auto,2016
+13,Missouri State,Auto,2016
+14,Central Arkansas,Auto,2016
+15,Troy,Auto,2016
+16,Idaho,Auto,2016
+1,Notre Dame,Auto,2016
+2,Maryland,Auto,2016
+3,Kentucky,At-Large,2016
+4,Stanford,At-Large,2016
+5,Miami (Florida),At-Large,2016
+6,Oklahoma,At-Large,2016
+7,Washington,At-Large,2016
+8,Georgia,At-Large,2016
+9,Indiana,At-Large,2016
+10,Pennsylvania,Auto,2016
+11,Purdue,At-Large,2016
+12,South Dakota State,Auto,2016
+13,San Francisco,Auto,2016
+14,UNC Asheville,Auto,2016
+15,Iona,Auto,2016
+16,North Carolina A&T,Auto,2016
+1,South Carolina,Auto,2016
+2,Arizona State,At-Large,2016
+3,Ohio State,At-Large,2016
+4,Syracuse,At-Large,2016
+5,Florida,At-Large,2016
+6,West Virginia,At-Large,2016
+7,Tennessee,At-Large,2016
+8,George Washington,Auto,2016
+9,Kansas State,At-Large,2016
+10,Green Bay,Auto,2016
+11,Princeton,At - Large,2016
+12,Albany,Auto,2016
+13,Army,Auto,2016
+14,Buffalo,Auto,2016
+15,New Mexico State,Auto,2016
+16,Jacksonville,Auto,2016
+1,UConn,Auto,2017
+2,Duke,At-large,2017
+3,Maryland,Auto,2017
+4,UCLA,At-large,2017
+5,Texas A&M,At-large,2017
+6,West Virginia,Auto,2017
+7,Temple,At-large,2017
+8,Syracuse,At-large,2017
+9,Iowa State,At-large,2017
+10,Oregon,At-large,2017
+11,Elon,Auto,2017
+12,Pennsylvania,Auto,2017
+13,Boise State,Auto,2017
+14,Bucknell,Auto,2017
+15,Hampton,Auto,2017
+16,Albany,Auto,2017
+1,Baylor,At-large,2017
+2,Mississippi St.,At-large,2017
+3,Washington,At-large,2017
+4,Louisville,At-large,2017
+5,Tennessee,At-large,2017
+6,Oklahoma,At-large,2017
+7,DePaul,At-large,2017
+8,LSU,At-large,2017
+9,California,At-large,2017
+10,UNI,At-large,2017
+11,Gonzaga,Auto,2017
+12,Dayton,Auto,2017
+13,Chattanooga,Auto,2017
+14,Montana St.,Auto,2017
+15,Troy,Auto,2017
+16,Texas Southern,Auto,2017
+1,Notre Dame,Auto,2017
+2,Stanford,Auto,2017
+3,Texas,At-large,2017
+4,Kentucky,At-large,2017
+5,Ohio St.,At-large,2017
+6,North Carolina St.,At-large,2017
+7,Kansas St.,At-large,2017
+8,Green Bay,Auto,2017
+9,Purdue,At-large,2017
+10,Drake,Auto,2017
+11,Auburn,At-large,2017
+12,Western Ky.,Auto,2017
+13,Belmont,Auto,2017
+14,Central Ark.,Auto,2017
+15,New Mexico St.,Auto,2017
+16,Robert Morris,Auto,2017
+1,South Carolina,Auto,2017
+2,Oregon St.,At-large,2017
+3,Florida St.,At-large,2017
+4,Miami (FL),At-large,2017
+5,Marquette,Auto,2017
+6,Missouri,At-large,2017
+7,Creighton,At-large,2017
+8,Arizona St.,At-large,2017
+9,Michigan St.,At-large,2017
+10,Toledo,Auto,2017
+11,South Fla.,At-large,2017
+12,Quinnipiac,Auto,2017
+13,Florida Gulf Coast,Auto,2017
+14,Western Ill.,Auto,2017
+15,Long Beach St.,Auto,2017
+16,UNC Asheville,Auto,2017
+1,Connecticut,Automatic,2018
+2,South Carolina,Automatic,2018
+3,Florida State,At-large,2018
+4,Georgia,At-Large,2018
+5,Duke,At-Large,2018
+6,South Florida,At-Large,2018
+7,California,At-Large,2018
+8,Miami (FL),At-Large,2018
+9,Quinnipiac,Automatic,2018
+10,Virginia,At-Large,2018
+11,Buffalo,At-Large,2018
+12,Belmont,Automatic,2018
+13,Mercer,Automatic,2018
+14,Little Rock,Automatic,2018
+15,North Carolina A&T,Automatic,2018
+16,Saint Francis (PA),Automatic,2018
+1,Mississippi State,At-Large,2018
+2,Texas,At-Large,2018
+3,UCLA,At-Large,2018
+4,NC State,At-Large,2018
+5,Maryland,At-Large,2018
+6,Iowa,At-Large,2018
+7,Arizona State,At-Large,2018
+8,Syracuse,At-Large,2018
+9,Oklahoma State,At-Large,2018
+10,Nebraska,At-Large,2018
+11,Creighton,At-Large,2018
+12,Princeton,Automatic,2018
+13,Elon,Automatic,2018
+14,American,Automatic,2018
+15,Maine,Automatic,2018
+16,Nicholls State,Automatic,2018
+1,Louisville,Automatic,2018
+2,Baylor,Automatic,2018
+3,Tennessee,At-Large,2018
+4,Stanford,At-Large,2018
+5,Missouri,At-Large,2018
+6,Oregon State,At-Large,2018
+7,Michigan,At-Large,2018
+8,Marquette,At-Large,2018
+9,Dayton,At-Large,2018
+10,Northern Colorado,Automatic,2018
+11,Western Kentucky,Automatic,2018
+12,Florida Gulf Coast,Automatic,2018
+13,Gonzaga,Automatic,2018
+14,Liberty,Automatic,2018
+15,Grambling State,Automatic,2018
+16,Boise State,Automatic,2018
+1,Notre Dame,At-Large,2018
+2,Oregon,Automatic,2018
+3,Ohio State,Automatic,2018
+4,Texas A&M,At-Large,2018
+5,DePaul,Automatic,2018
+6,LSU,At-Large,2018
+7,Green Bay,Automatic,2018
+8,South Dakota State,Automatic,2018
+9,Villanova,At-Large,2018
+10,Minnesota,At-Large,2018
+11,Central Michigan,Automatic,2018
+12,Oklahoma,At-Large,2018
+13,Drake,Automatic,2018
+14,George Washington,Automatic,2018
+15,Seattle,Automatic,2018
+16,Cal State Northridge,Automatic,2018
+1,Louisville,At-large,2019
+2,UConn,Automatic,2019
+3,Maryland,At-large,2019
+4,Oregon State,At-Large,2019
+5,Gonzaga,At-Large,2019
+6,UCLA,At-Large,2019
+7,Rutgers,At-Large,2019
+8,Michigan,At-Large,2019
+9,Kansas State,At-Large,2019
+10,Buffalo,Automatic,2019
+11,Tennessee,At-Large,2019
+12,Little Rock,Automatic,2019
+13,Boise State,Automatic,2019
+14,Radford,Automatic,2019
+15,Towson,Automatic,2019
+16,Robert Morris,Automatic,2019
+1,Notre Dame,Automatic,2019
+2,Stanford,Automatic,2019
+3,Iowa State,At-Large,2019
+4,Texas A&M,At-Large,2019
+5,Marquette,At-Large,2019
+6,DePaul,Automatic,2019
+7,BYU,Automatic,2019
+8,Central Michigan,At-Large,2019
+9,Michigan State,At-Large,2019
+10,Auburn,At-Large,2019
+11,Missouri State,Automatic,2019
+12,Rice,Automatic,2019
+13,Wright State,Automatic,2019
+14,New Mexico State,Automatic,2019
+15,UC Davis,Automatic,2019
+16,Bethune–Cookman,Automatic,2019
+1,Baylor,Automatic,2019
+2,Iowa,Automatic,2019
+3,NC State,At-Large,2019
+4,South Carolina,At-Large,2019
+5,Florida State,At-Large,2019
+6,Kentucky,At-Large,2019
+7,Missouri,At-Large,2019
+8,California,At-Large,2019
+9,North Carolina,At-Large,2019
+10,Drake,At-Large,2019
+11,Princeton,Automatic,2019
+12,Bucknell,Automatic,2019
+13,Belmont,Automatic,2019
+14,Maine,Automatic,2019
+15,Mercer,Automatic,2019
+16,Abilene Christian,Automatic,2019
+1,Mississippi State,Automatic,2019
+2,Oregon,At-Large,2019
+3,Syracuse,At-Large,2019
+4,Miami (FL),At-Large,2019
+5,Arizona State,At-Large,2019
+6,South Dakota State,Automatic,2019
+7,Texas,At-Large,2019
+8,South Dakota,At-Large,2019
+9,Clemson,At-Large,2019
+10,Indiana,At-Large,2019
+11,Quinnipiac,Automatic,2019
+12,UCF,At-Large,2019
+13,Florida Gulf Coast,Automatic,2019
+14,Fordham,Automatic,2019
+15,Portland State,Automatic,2019
+16,Southern,Automatic,2019
+1,Stanford,Automatic,2021
+2,Louisville,At-Large,2021
+3,Georgia,At-Large,2021
+4,Arkansas,At-Large,2021
+5,Missouri State,At-Large,2021
+6,Oregon,At-Large,2021
+7,Northwestern,At-Large,2021
+8,Oklahoma State,At-Large,2021
+9,Wake Forest,At-Large,2021
+10,UCF,At-Large,2021
+11,South Dakota,Automatic,2021
+12,UC Davis,Automatic,2021
+13,Wright State,Automatic,2021
+14,Drexel,Automatic,2021
+15,Marist,Automatic,2021
+16,Utah Valley,Automatic,2021
+1,South Carolina,Automatic,2021
+2,Maryland,Automatic,2021
+3,UCLA,At-Large,2021
+4,West Virginia,At-Large,2021
+5,Georgia Tech,At-Large,2021
+6,Texas,At-Large,2021
+7,Alabama,At-Large,2021
+8,Oregon State,At-Large,2021
+9,Florida State,At-Large,2021
+10,North Carolina,At-Large,2021
+11,Bradley,Automatic,2021
+12,Stephen F. Austin,Automatic,2021
+13,Lehigh,Automatic,2021
+14,Wyoming,Automatic,2021
+15,Mount St. Mary's,Automatic,2021
+16,Mercer,Automatic,2021
+1,NC State,Automatic,2021
+2,Texas A&M,At-Large,2021
+3,Arizona,At-Large,2021
+4,Indiana,At-Large,2021
+5,Gonzaga,Automatic,2021
+6,Rutgers,At-Large,2021
+7,Iowa State,At-Large,2021
+8,South Florida,Automatic,2021
+9,Washington State,At-Large,2021
+10,Michigan State,At-Large,2021
+11,BYU,At-Large,2021
+12,Belmont,Automatic,2021
+13,VCU,Automatic,2021
+14,Stony Brook,Automatic,2021
+15,Troy,Automatic,2021
+16,North Carolina A&T,Automatic,2021
+1,UConn,Automatic,2021
+2,Baylor,Automatic,2021
+3,Tennessee,At-Large,2021
+4,Kentucky,At-Large,2021
+5,Iowa,At-Large,2021
+6,Michigan,At-Large,2021
+7,Virginia Tech,At-Large,2021
+8,Syracuse,At-Large,2021
+9,South Dakota State,At-Large,2021
+10,Marquette,At-Large,2021
+11,Florida Gulf Coast,Automatic,2021
+12,Central Michigan,Automatic,2021
+13,Idaho State,Automatic,2021
+14,Middle Tennessee,Automatic,2021
+15,Jackson State,Automatic,2021
+16,High Point,Automatic,2021
+1,South Carolina,At-Large,2022
+2,Iowa,Automatic,2022
+3,Iowa State,At-Large,2022
+4,Arizona,At-Large,2022
+5,North Carolina,At-Large,2022
+6,Georgia,At-Large,2022
+7,Colorado,At-Large,2022
+8,Miami (FL),At-Large,2022
+9,South Florida,At-Large,2022
+10,Creighton,At-Large,2022
+11,Dayton,At-Large,2022
+11,DePaul,At-Large,2022
+12,Stephen F. Austin,Automatic,2022
+13,UNLV,Automatic,2022
+14,UT Arlington,Automatic,2022
+15,Illinois State,Automatic,2022
+16,Howard,Automatic,2022
+16,Incarnate Word,Automatic,2022
+1,Louisville,At-Large,2022
+2,Baylor,At-Large,2022
+3,Michigan,At-Large,2022
+4,Tennessee,At-Large,2022
+5,Oregon,At-Large,2022
+6,BYU,At-Large,2022
+7,Ole Miss,At-Large,2022
+8,Nebraska,At-Large,2022
+9,Gonzaga,Automatic,2022
+10,South Dakota,Automatic,2022
+11,Villanova,At-Large,2022
+12,Belmont,Automatic,2022
+13,Buffalo,Automatic,2022
+14,American,Automatic,2022
+15,Hawaiʻi,Automatic,2022
+16,Albany,Automatic,2022
+1,Stanford,Automatic,2022
+2,Texas,Automatic,2022
+3,LSU,At-Large,2022
+4,Maryland,At-Large,2022
+5,Virginia Tech,At-Large,2022
+6,Ohio State,At-Large,2022
+7,Utah,At-Large,2022
+8,Kansas,At-Large,2022
+9,Georgia Tech,At-Large,2022
+10,Arkansas,At-Large,2022
+11,Missouri State,At-Large,2022
+11,Florida State,At-Large,2022
+12,Florida Gulf Coast,Automatic,2022
+13,Delaware,Automatic,2022
+14,Jackson State,Automatic,2022
+15,Fairfield,Automatic,2022
+16,Montana State,Automatic,2022
+1,NC State,Automatic,2022
+2,UConn,Automatic,2022
+3,Indiana,At-Large,2022
+4,Oklahoma,At-Large,2022
+5,Notre Dame,At-Large,2022
+6,Kentucky,Automatic,2022
+7,UCF,Automatic,2022
+8,Washington State,At-Large,2022
+9,Kansas State,At-Large,2022
+10,Florida,At-Large,2022
+11,Princeton,Automatic,2022
+12,UMass,Automatic,2022
+13,IUPUI,Automatic,2022
+14,Charlotte,Automatic,2022
+15,Mercer,Automatic,2022
+16,Mount St. Mary's,Automatic,2022
+16,Longwood,Automatic,2022

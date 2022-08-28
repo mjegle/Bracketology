@@ -1,0 +1,81 @@
+##### FIND OFFENSIVE RATING #######
+# Problem: No possession ID which means we can't find the number of possessions per game as of right now
+# Need to find the number of possessions on our own
+# How can a possession end?
+# 1. Made shot
+# 2. Missed shot & defensive rebound
+# 3. Turnover/offensive foul
+# 4. End of period
+
+# Need to use an estimate for now. Obviously has some drawbacks since it's not precise but it could be a blessing in disguise
+# since now we can get # of possessions for games for which pbp data is not available
+
+library(hoopR)
+library(tidyverse)
+
+data <- data.frame()
+
+for (i in 2011:2022)
+{
+  data <- data %>%
+    bind_rows(load_mbb_team_box(i) %>% mutate(year = i))
+}
+
+data <- data %>%
+  select(team = team_location, game_id, game_date, field_goals_made_field_goals_attempted:fouls, year)
+
+data <- data %>%
+  separate(field_goals_made_field_goals_attempted, into = c("fgm", "fga"), sep = "-") %>%
+  separate(three_point_field_goals_made_three_point_field_goals_attempted, into = c("fgm3", "fga3"), sep = "-") %>%
+  separate(free_throws_made_free_throws_attempted, into = c("ftm", "fta"), sep = "-") %>%
+  mutate_at(.vars = vars(fgm:fta, turnovers, offensive_rebounds),
+            .funs = as.numeric)
+
+# Going to use kenpom's approximation for possessions listed here: https://kenpom.com/blog/the-possession/#:~:text=The%20most%20common%20formula%20for,and%20FTA%20%3D%20free%20throw%20attempts.
+
+
+
+data <- data %>%
+  mutate(fgm2 = fgm - fgm3,
+         fga2 = fga - fga3,
+         points = (ftm) + (2 * fgm2) + (3 * fgm3))
+
+data <- data %>%
+  inner_join(data, suffix = c("", "_opp"), by = "game_id")
+
+data <- data %>%
+  filter(team != team_opp)
+
+data <- data %>%
+  mutate(possessions = round((fga - offensive_rebounds) + turnovers + (0.44 * fta)),
+         possessions_opp = round((fga_opp - offensive_rebounds_opp) + turnovers_opp + (0.44 * fta_opp)))
+
+data <- data %>%
+  arrange(game_date) %>%
+  group_by(team, year) %>%
+  mutate(off_rating = cumsum(points) / cumsum(possessions) * 100,
+         def_rating = cumsum(points_opp) / cumsum(possessions_opp) * 100,
+         net_rating = off_rating - def_rating) %>%
+  ungroup()
+
+net <- data %>%
+  select(team, game_id, off_rating, def_rating, net_rating)
+
+data <- data %>%
+  group_by(team_opp, year) %>%
+  mutate(opp_off_rating = cumsum(points_opp) / cumsum(possessions_opp) * 100,
+         opp_def_rating = cumsum(points) / cumsum(possessions) * 100,
+         opp_net_rating = opp_off_rating - opp_def_rating) %>%
+  ungroup() %>%
+  group_by(team, year) %>%
+  mutate(sos_off = cummean(opp_def_rating),
+         sos_def = cummean(opp_off_rating),
+         sos_net = cummean(opp_net_rating)) %>%
+  ungroup()
+
+sos <- data %>%
+  select(team, game_id, sos_off, sos_def, sos_net)
+
+write_csv(net, "../../data/mens/mens_net_ratings.csv")
+write_csv(sos, "../../data/mens/mens_sos_ratings.csv")
+
