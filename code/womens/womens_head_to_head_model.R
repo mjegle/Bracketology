@@ -18,23 +18,46 @@ team_stats <- team_stats %>%
   mutate_at(.vars = vars(game_id:ftf_opp),
             .funs = lag)
 
-for (i in 2011:2022)
+home_team <- data.frame()
+
+for (i in 2014:2022)
 {
   results <- results %>%
-    bind_rows(load_mbb_schedule(i) %>%
-                select(id, date, neutralSite, conferenceCompetition, notes_headline,
-                       home.location, home.conferenceId, home.score, away.location,
-                       away.name, away.conferenceId, away.score, season, tournamentId) %>%
-                mutate(id = as.integer(id),
-                       home.conferenceId = as.integer(home.conferenceId),
-                       away.conferenceId = as.integer(away.conferenceId)))
+    bind_rows(load_wbb_team_box(i) %>% mutate(year = i))
+  
+  home_team <- home_team %>%
+    bind_rows(load_wbb_schedule(i) %>% mutate(year = i) %>% select(game_id = id, home_location, neutral_site))
 }
 
 results <- results %>%
-  filter(is.na(tournamentId) | !(tournamentId %in% c(22, 11, 21, 35, 42)))
+  select(team = team_location, game_id, game_date, field_goals_made_field_goals_attempted, three_point_field_goals_made_three_point_field_goals_attempted,
+         free_throws_made_free_throws_attempted, year)
 
 results <- results %>%
-  mutate(home_win = ifelse(home.score > away.score, 1, 0))
+  separate(field_goals_made_field_goals_attempted, into = c("fgm", "fga"), sep = "-")
+
+results <- results %>%
+  separate(three_point_field_goals_made_three_point_field_goals_attempted, into = c("fgm3", "fga3"), sep = "-")
+
+results <- results %>%
+  separate(free_throws_made_free_throws_attempted, into = c("ftm", "fta"), sep = "-")
+
+# 
+results <- results %>%
+  mutate_at(.vars = vars(fgm:fta),
+            .funs = as.numeric)
+
+results <- results %>%
+  mutate(fgm2 = fgm - fgm3,
+         fga2 = fga - fga3,
+         points = (ftm) + (2 * fgm2) + (3 * fgm3))
+
+results <- results %>%
+  inner_join(results, suffix = c("", "_opp"), by = "game_id")
+
+results <- results %>%
+  filter(team != team_opp)
+
 
 home_stats <- team_stats
 away_stats <- team_stats
@@ -42,38 +65,47 @@ away_stats <- team_stats
 colnames(home_stats) <- paste0("home_", colnames(home_stats))
 colnames(away_stats) <- paste0("away_", colnames(away_stats))
 
-results <- results %>%
-  inner_join(home_stats, by = c("home.location" = "home_team", "id" = "home_game_id")) %>%
-  inner_join(away_stats, by = c("away.location" = "away_team", "id" = "away_game_id"))
+home_team <- home_team %>%
+  inner_join(results, by = c("game_id" = "game_id", "home_location" = "team"))
+
+home_team <- home_team %>%
+  select(game_id, home_team = home_location, game_date, neutral_site)
+
+data <- home_team %>%
+  inner_join(results, by = c("home_team" = "team", "game_id" = "game_id")) %>%
+  inner_join(home_stats, by = c("home_team" = "home_team", "game_id" = "home_game_id")) %>%
+  inner_join(away_stats, by = c("team_opp" = "away_team", "game_id" = "away_game_id"))
+
+data <- data %>%
+  mutate(home_win = ifelse(points > points_opp, 1, 0))
 
 
 # Model #
 
-train_index <- sample(nrow(results), nrow(results) * 0.8, replace = F)
-train <- results[train_index,]
-test <- results[-train_index,]
+train_index <- sample(nrow(data), nrow(data) * 0.8, replace = F)
+train <- data[train_index,]
+test <- data[-train_index,]
 
 
 
 train <- train %>%
-  select(home_win, neutralSite, home_o_reb_rate:home_ftf_opp, away_o_reb_rate:away_ftf_opp)
+  select(home_win, neutral_site, home_o_reb_rate:home_ftf_opp, away_o_reb_rate:away_ftf_opp)
 test <- test %>%
-  select(home_win, neutralSite, home_o_reb_rate:home_ftf_opp, away_o_reb_rate:away_ftf_opp)
+  select(home_win, neutral_site, home_o_reb_rate:home_ftf_opp, away_o_reb_rate:away_ftf_opp)
 
 train$home_win <- as.factor(train$home_win)
 test$home_win <- as.factor(test$home_win)
 
 tictoc::tic()
-matchup_rf <- randomForest(home_win ~ ., train)
-tictoc::toc()
-
 matchup_glm <- glm(home_win ~ ., data = train, family = "binomial")
+tictoc::toc()
 
 summary(matchup_glm)
 
-pred <- predict(matchup_rf, newdata = test)
-mean(pred == test$home_win)
+pred <- predict(matchup_glm, newdata = test, type = "response")
+pred_outcome <- ifelse(pred > 0.5, 1, 0)
+mean(pred_outcome == test$home_win, na.rm = T)
 
-saveRDS(matchup_rf, "../../data/womens/matchup_rf.RDS")
+#saveRDS(matchup_rf, "../../data/womens/matchup_rf.RDS")
 saveRDS(matchup_glm, "../../data/womens/womens_matchup_glm.RDS")
 

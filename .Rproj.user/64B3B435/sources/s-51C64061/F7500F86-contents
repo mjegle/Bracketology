@@ -1,0 +1,97 @@
+###### SCRAPE WIKIPEDIA NCAA TOURNAMENT SEED LISTS
+
+library(xml2)
+library(rvest)
+
+url <- "https://en.wikipedia.org/wiki/2019_NCAA_Division_I_Men%27s_Basketball_Tournament"
+
+html <- read_html(url)
+
+html_table(html)[8]
+
+#'
+#' Helper method to make the tournament seed scraping more automated
+#' @author Michael Egle
+#' @param yr the tournament year to scrape
+#' @return seed_list the list of the teams that made the tournament that year and their corresponding seed
+#' 
+scrape_wikipedia_seed_list_table <- function(yr)
+{
+  # These all follow the same URL structure
+  url <- paste0("https://en.wikipedia.org/wiki/", yr, "_NCAA_Division_I_Men%27s_Basketball_Tournament")
+  
+  html <- read_html(url)
+  if (yr %in% c(2014, 2019:2021))
+  {
+    tables <- html_table(html)[5:8] %>%
+      lapply(as.data.frame)
+  } else if (yr %in% c(2015, 2016, 2017, 2018))
+  {
+    tables <- html_table(html)[4:7] %>%
+      lapply(as.data.frame)
+  } else if (yr %in% c(2013))
+  {
+    tables <- html_table(html)[6:9] %>%
+      lapply(as.data.frame)
+    
+    for (i in 1:4)
+    {
+      t <- tables[[i]]
+      colnames(tables[[i]]) <- t[1,]
+      tables[[i]] <- tables[[i]] %>%
+        filter(Seed != "Seed")
+    }
+  }
+  else if (yr %in% c(2011, 2012))
+  {
+    tables <- html_table(html)[5:8] %>%
+      lapply(as.data.frame)
+    
+    for (i in 1:4)
+    {
+      t <- tables[[i]]
+      colnames(tables[[i]]) <- t[1,]
+      tables[[i]] <- tables[[i]] %>%
+        filter(Seed != "Seed")
+    }
+  }
+  else 
+  {
+    tables <- html_table(html)[6:9] %>%
+      lapply(as.data.frame)
+  }
+  
+  # need to remove the asterisks from seed numbers and make it numeric
+  for (i in 1:4)
+  {
+    tables[[i]] <- tables[[i]] %>%
+      mutate(Seed = str_remove(Seed, "\\*"),
+             Seed = str_remove(Seed, "#"),
+             Seed = as.numeric(Seed))
+  }
+  
+  # For sure a more elegant way to do this, I just couldn't find it
+  
+  seed_list <- tables[[1]] %>%
+    bind_rows(tables[[2]]) %>%
+    bind_rows(tables[[3]]) %>%
+    bind_rows(tables[[4]])
+  
+  return(seed_list)
+  
+}
+
+seeds <- data.frame()
+# Scrape all the seasons NCAA tournament seeds
+for (i in 2011:2022)
+{
+  if (i != 2020)
+  {
+    seeds <- seeds %>%
+      bind_rows(scrape_wikipedia_seed_list_table(i) %>% select(Seed, School) %>% mutate(year = i))
+    print(i)
+  }
+}
+
+write_csv(seeds, "data/mens_tournament_seeds.csv")
+

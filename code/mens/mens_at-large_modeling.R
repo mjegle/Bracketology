@@ -61,8 +61,7 @@ stats <- stats %>%
             pace = last(pace),
             ftf = last(ftf),
             ftf_opp = last(ftf_opp),
-            conference = last(conference),
-            avg_bids = last(avg_bids)) %>%
+            conference = last(conference)) %>%
   ungroup() %>%
   group_by(conference, year) %>%
   mutate(conf_avg_net = mean(net_rating))
@@ -82,7 +81,7 @@ stats_seeds <- stats_seeds %>%
 stats_seeds$Berth <- as.factor(stats_seeds$Berth)
 
 train <- stats_seeds %>%
-  filter(year < 2022) %>%
+  filter(year < 2022, year != 2020) %>% # can't include 2020 since there was no tournament that year
   ungroup() %>%
   select(-c(team, year, Seed))
 
@@ -94,10 +93,11 @@ test <- stats_seeds %>%
 at_large_rf <- randomForest(Berth ~ conf_wins + conf_losses + wins + losses + major_wins + major_losses + mid_major_wins +
                               mid_major_losses + o_reb_rate + d_reb_rate + off_rating + off_rating + def_rating + net_rating +
                               sos_off + sos_def + sos_net + to_rate_off + to_rate_def + steal_rate + opp_steal_rate + pace +
-                              ftf + ftf_opp + conference, data = train)
+                              ftf + ftf_opp + conference, data = train,
+                            mtry = 10)
 pred <- predict(at_large_rf, newdata = test, type = "prob")
 
-saveRDS(at_large_rf, "../../data/mens/mens_at_large_rf")
+saveRDS(at_large_rf, "../../data/mens/mens_at_large_rf.RDS")
 
 pred <- pred %>%
   as.data.frame()

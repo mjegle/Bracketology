@@ -1,5 +1,5 @@
 Seed,School,Berth,year
-1,Connecticut,Automatic,2014
+1,UConn,Automatic,2014
 2,Duke,At-large,2014
 3,Texas A&M,At-large,2014
 4,Nebraska,Automatic,2014
@@ -7,7 +7,7 @@ Seed,School,Berth,year
 6,Gonzaga,Automatic,2014
 7,DePaul,Automatic,2014
 8,Georgia,At-large,2014
-9,St. Joseph's,At-large,2014
+9,Saint Joseph's,At-large,2014
 10,Oklahoma,At-large,2014
 11,James Madison,Automatic,2014
 12,BYU,At-large,2014
@@ -22,15 +22,15 @@ Seed,School,Berth,year
 5,Michigan State,At-large,2014
 6,Dayton,At-large,2014
 7,Iowa State,At-large,2014
-8,Middle Tennessee State,Automatic,2014
+8,Middle Tennessee,Automatic,2014
 9,Oregon State,At-large,2014
 10,Florida State,At-large,2014
 11,Florida,At-large,2014
 12,Hampton,Automatic,2014
-13,Tennessee-Martin,Automatic,2014
+13,UT Martin,Automatic,2014
 14,Wichita State,Automatic,2014
 15,South Dakota,Automatic,2014
-16,Cal State Northridge,Automatic,2014
+16,CSU Northridge,Automatic,2014
 1,Notre Dame,Automatic,2014
 2,Baylor,Automatic,2014
 3,Kentucky,At-large,2014
@@ -58,12 +58,12 @@ Seed,School,Berth,year
 9,USC,Automatic,2014
 10,Georgia Tech,At-large,2014
 11,Marist,Automatic,2014
-12,Penn,Automatic,2014
+12,Pennsylvania,Automatic,2014
 13,Army,Automatic,2014
 14,Idaho,Automatic,2014
 15,Albany,Automatic,2014
 16,Northwestern State,Automatic,2014
-1,Connecticut,Automatic,2015
+1,UConn,Automatic,2015
 2,Kentucky,At-large,2015
 3,Louisville,At-large,2015
 4,California,At-large,2015
@@ -78,7 +78,7 @@ Seed,School,Berth,year
 13,Wichita State,Automatic,2015
 14,BYU,Automatic,2015
 15,Tennessee State,Automatic,2015
-16,St. Francis Brooklyn,Automatic,2015
+16,St. Francis (BKN),Automatic,2015
 1,Maryland,Automatic,2015
 2,Tennessee,At-large,2015
 3,Oregon State,At-large,2015
@@ -105,10 +105,10 @@ Seed,School,Berth,year
 8,Minnesota,At-large,2015
 9,DePaul,Automatic,2015
 10,Arkansas,At-large,2015
-11,Miami (FL),At-large,2015
+11,Miami,At-large,2015
 12,Quinnipiac,Automatic,2015
-13,Cal State Northridge,Automatic,2015
-14,American,Automatic,2015
+13,CSU Northridge,Automatic,2015
+14,American University,Automatic,2015
 15,Northwestern State,Automatic,2015
 16,Montana,Automatic,2015
 1,South Carolina,Automatic,2015
@@ -121,13 +121,13 @@ Seed,School,Berth,year
 8,Syracuse,At-large,2015
 9,Nebraska,At-large,2015
 10,Oklahoma State,At-large,2015
-11,Arkansas-Little Rock,Automatic,2015
+11,Little Rock,Automatic,2015
 12,James Madison,Automatic,2015
 13,Liberty,Automatic,2015
 14,Ohio,Automatic,2015
 15,Alabama State,Automatic,2015
 16,Savannah State,Automatic,2015
-1,Connecticut,Auto,2016
+1,UConn,Auto,2016
 2,Texas,At-Large,2016
 3,UCLA,At-Large,2016
 4,Michigan State,At-Large,2016
@@ -140,7 +140,7 @@ Seed,School,Berth,year
 11,Colorado State,Auto,2016
 12,Chattanooga,Auto,2016
 13,Belmont,Auto,2016
-14,Hawaii,Auto,2016
+14,Hawai'i,Auto,2016
 15,Alabama State,Auto,2016
 16,Robert Morris,Auto,2016
 1,Baylor,Auto,2016
@@ -163,7 +163,7 @@ Seed,School,Berth,year
 2,Maryland,Auto,2016
 3,Kentucky,At-Large,2016
 4,Stanford,At-Large,2016
-5,Miami (Florida),At-Large,2016
+5,Miami,At-Large,2016
 6,Oklahoma,At-Large,2016
 7,Washington,At-Large,2016
 8,Georgia,At-Large,2016
@@ -208,7 +208,7 @@ Seed,School,Berth,year
 15,Hampton,Auto,2017
 16,Albany,Auto,2017
 1,Baylor,At-large,2017
-2,Mississippi St.,At-large,2017
+2,Mississippi State,At-large,2017
 3,Washington,At-large,2017
 4,Louisville,At-large,2017
 5,Tennessee,At-large,2017
@@ -216,53 +216,53 @@ Seed,School,Berth,year
 7,DePaul,At-large,2017
 8,LSU,At-large,2017
 9,California,At-large,2017
-10,UNI,At-large,2017
+10,Northern Iowa,At-large,2017
 11,Gonzaga,Auto,2017
 12,Dayton,Auto,2017
 13,Chattanooga,Auto,2017
-14,Montana St.,Auto,2017
+14,Montana State,Auto,2017
 15,Troy,Auto,2017
 16,Texas Southern,Auto,2017
 1,Notre Dame,Auto,2017
 2,Stanford,Auto,2017
 3,Texas,At-large,2017
 4,Kentucky,At-large,2017
-5,Ohio St.,At-large,2017
-6,North Carolina St.,At-large,2017
-7,Kansas St.,At-large,2017
+5,Ohio State,At-large,2017
+6,NC State,At-large,2017
+7,Kansas State,At-large,2017
 8,Green Bay,Auto,2017
 9,Purdue,At-large,2017
 10,Drake,Auto,2017
 11,Auburn,At-large,2017
-12,Western Ky.,Auto,2017
+12,Western Kentucky,Auto,2017
 13,Belmont,Auto,2017
-14,Central Ark.,Auto,2017
-15,New Mexico St.,Auto,2017
+14,Central Arkansas,Auto,2017
+15,New Mexico State,Auto,2017
 16,Robert Morris,Auto,2017
 1,South Carolina,Auto,2017
-2,Oregon St.,At-large,2017
-3,Florida St.,At-large,2017
-4,Miami (FL),At-large,2017
+2,Oregon State,At-large,2017
+3,Florida State,At-large,2017
+4,Miami,At-large,2017
 5,Marquette,Auto,2017
 6,Missouri,At-large,2017
 7,Creighton,At-large,2017
-8,Arizona St.,At-large,2017
-9,Michigan St.,At-large,2017
+8,Arizona State,At-large,2017
+9,Michigan State,At-large,2017
 10,Toledo,Auto,2017
-11,South Fla.,At-large,2017
+11,South Florida,At-large,2017
 12,Quinnipiac,Auto,2017
 13,Florida Gulf Coast,Auto,2017
-14,Western Ill.,Auto,2017
-15,Long Beach St.,Auto,2017
+14,Western Illinois,Auto,2017
+15,Long Beach State,Auto,2017
 16,UNC Asheville,Auto,2017
-1,Connecticut,Automatic,2018
+1,UConn,Automatic,2018
 2,South Carolina,Automatic,2018
 3,Florida State,At-large,2018
 4,Georgia,At-Large,2018
 5,Duke,At-Large,2018
 6,South Florida,At-Large,2018
 7,California,At-Large,2018
-8,Miami (FL),At-Large,2018
+8,Miami,At-Large,2018
 9,Quinnipiac,Automatic,2018
 10,Virginia,At-Large,2018
 11,Buffalo,At-Large,2018
@@ -270,7 +270,7 @@ Seed,School,Berth,year
 13,Mercer,Automatic,2018
 14,Little Rock,Automatic,2018
 15,North Carolina A&T,Automatic,2018
-16,Saint Francis (PA),Automatic,2018
+16,St. Francis (PA),Automatic,2018
 1,Mississippi State,At-Large,2018
 2,Texas,At-Large,2018
 3,UCLA,At-Large,2018
@@ -284,9 +284,9 @@ Seed,School,Berth,year
 11,Creighton,At-Large,2018
 12,Princeton,Automatic,2018
 13,Elon,Automatic,2018
-14,American,Automatic,2018
+14,American University,Automatic,2018
 15,Maine,Automatic,2018
-16,Nicholls State,Automatic,2018
+16,Nicholls,Automatic,2018
 1,Louisville,Automatic,2018
 2,Baylor,Automatic,2018
 3,Tennessee,At-Large,2018
@@ -301,7 +301,7 @@ Seed,School,Berth,year
 12,Florida Gulf Coast,Automatic,2018
 13,Gonzaga,Automatic,2018
 14,Liberty,Automatic,2018
-15,Grambling State,Automatic,2018
+15,Grambling,Automatic,2018
 16,Boise State,Automatic,2018
 1,Notre Dame,At-Large,2018
 2,Oregon,Automatic,2018
@@ -317,8 +317,8 @@ Seed,School,Berth,year
 12,Oklahoma,At-Large,2018
 13,Drake,Automatic,2018
 14,George Washington,Automatic,2018
-15,Seattle,Automatic,2018
-16,Cal State Northridge,Automatic,2018
+15,Seattle U,Automatic,2018
+16,CSU Northridge,Automatic,2018
 1,Louisville,At-large,2019
 2,UConn,Automatic,2019
 3,Maryland,At-large,2019
@@ -350,7 +350,7 @@ Seed,School,Berth,year
 13,Wright State,Automatic,2019
 14,New Mexico State,Automatic,2019
 15,UC Davis,Automatic,2019
-16,Bethune–Cookman,Automatic,2019
+16,Bethune-Cookman,Automatic,2019
 1,Baylor,Automatic,2019
 2,Iowa,Automatic,2019
 3,NC State,At-Large,2019
@@ -370,7 +370,7 @@ Seed,School,Berth,year
 1,Mississippi State,Automatic,2019
 2,Oregon,At-Large,2019
 3,Syracuse,At-Large,2019
-4,Miami (FL),At-Large,2019
+4,Miami,At-Large,2019
 5,Arizona State,At-Large,2019
 6,South Dakota State,Automatic,2019
 7,Texas,At-Large,2019
@@ -454,7 +454,7 @@ Seed,School,Berth,year
 5,North Carolina,At-Large,2022
 6,Georgia,At-Large,2022
 7,Colorado,At-Large,2022
-8,Miami (FL),At-Large,2022
+8,Miami,At-Large,2022
 9,South Florida,At-Large,2022
 10,Creighton,At-Large,2022
 11,Dayton,At-Large,2022
@@ -478,8 +478,8 @@ Seed,School,Berth,year
 11,Villanova,At-Large,2022
 12,Belmont,Automatic,2022
 13,Buffalo,Automatic,2022
-14,American,Automatic,2022
-15,Hawaiʻi,Automatic,2022
+14,American University,Automatic,2022
+15,Hawai'i,Automatic,2022
 16,Albany,Automatic,2022
 1,Stanford,Automatic,2022
 2,Texas,Automatic,2022

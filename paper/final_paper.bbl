@@ -1,0 +1,189 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Bachman%
+\ \BBA {} Higgins%
+}{%
+Bachman%
+\ \BBA {} Higgins%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+bachman_higgins_2021_ncaaw}
+\APACinsertmetastar {%
+bachman_higgins_2021_ncaaw}%
+\begin{APACrefauthors}%
+Bachman, R.%
+\BCBT {}\ \BBA {} Higgins, L.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {NCAA Undervalued Women's Basketball Tournament by
+  Millions While Prioritizing Men's Tourney, Report Finds} {Ncaa undervalued
+  women's basketball tournament by millions while prioritizing men's tourney,
+  report finds}.{\BBCQ}
+\newblock
+\begin{APACrefURL}
+  \url{https://www.wsj.com/articles/ncaa-undervalued-womens-basketball-tournament-11628018560}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Brooks%
+}{%
+Brooks%
+}{%
+{\protect \APACyear {2022}}%
+}]{%
+brooks_2022_ncaaw}
+\APACinsertmetastar {%
+brooks_2022_ncaaw}%
+\begin{APACrefauthors}%
+Brooks, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {2022 NCAA Division I Women’s Basketball Championship
+  is Most-Watched Season Finale in Nearly Two Decades – 4.85 Million Viewers
+  on ESPN Networks} {2022 ncaa division i women’s basketball championship is
+  most-watched season finale in nearly two decades – 4.85 million viewers on
+  espn networks}.{\BBCQ}
+\newblock
+\begin{APACrefURL}
+  \url{https://espnpressroom.com/us/press-releases/2022/04/2022-ncaa-division-i-womens-basketball-championship-is-most-watched-season-finale-in-nearly-two-decades-4-85-million-viewers-on-espn-networks/}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Dietz%
+}{%
+Dietz%
+}{%
+{\protect \APACyear {2006}}%
+}]{%
+dietz_bracket_2006}
+\APACinsertmetastar {%
+dietz_bracket_2006}%
+\begin{APACrefauthors}%
+Dietz, B.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Ten Questions for Joe Lunardi} {Ten questions for joe
+  lunardi}.{\BBCQ}
+\newblock
+\begin{APACrefURL}
+  \url{https://www.news-gazette.com/sports/illini-sports/ten-questions-for-joe-lunardi/article_30ece418-4b7f-57cd-9fad-9188d1dee758.html}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gilani%
+}{%
+Gilani%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+gilani_2021_hoopR}
+\APACinsertmetastar {%
+gilani_2021_hoopR}%
+\begin{APACrefauthors}%
+Gilani, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+\APACrefbtitle {hoopR: The SportsDataverse's R Package for Men's Basketball
+  Data.} {hoopr: The sportsdataverse's r package for men's basketball data.}
+\newblock
+\begin{APACrefURL} \url{https://hoopR.sportsdataverse.org} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gilani%
+\ \BBA {} Hutchinson%
+}{%
+Gilani%
+\ \BBA {} Hutchinson%
+}{%
+{\protect \APACyear {2021}}%
+}]{%
+hutchinson_gilani_2021_wehoop}
+\APACinsertmetastar {%
+hutchinson_gilani_2021_wehoop}%
+\begin{APACrefauthors}%
+Gilani, S.%
+\BCBT {}\ \BBA {} Hutchinson, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+\APACrefbtitle {wehoop: The SportsDataverse's R Package for Women's Basketball
+  Data.} {wehoop: The sportsdataverse's r package for women's basketball data.}
+\newblock
+\begin{APACrefURL} \url{https://wehoop.sportsdataverse.org} \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+NCAA%
+}{%
+NCAA%
+}{%
+{\protect \APACyear {2022}}%
+{\protect \APACexlab {{\protect \BCnt {1}}}}}]{%
+ncaa_mbb_procedures}
+\APACinsertmetastar {%
+ncaa_mbb_procedures}%
+\begin{APACrefauthors}%
+NCAA.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022{\protect \BCnt {1}}}{}{}.
+\newblock
+\APACrefbtitle {2021-22 NCAA Division I Men's Basketball Championship
+  Principles and Procedures for Establishing the Bracket} {2021-22 ncaa
+  division i men's basketball championship principles and procedures for
+  establishing the bracket}\ \APACbVolEdTR{}{\BTR{}}.
+\newblock
+\begin{APACrefURL}
+  \url{https://www.ncaa.com/_flysystem/public-s3/images/2022/02/13/2021-22\%20Principles\%20and\%20Procedures.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+NCAA%
+}{%
+NCAA%
+}{%
+{\protect \APACyear {2022}}%
+{\protect \APACexlab {{\protect \BCnt {2}}}}}]{%
+ncaa_wbb_procedures}
+\APACinsertmetastar {%
+ncaa_wbb_procedures}%
+\begin{APACrefauthors}%
+NCAA.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022{\protect \BCnt {2}}}{}{}.
+\newblock
+\APACrefbtitle {2021-22 NCAA Division I Women's Basketball Championship
+  Principles and Procedures for Establishing the Bracket} {2021-22 ncaa
+  division i women's basketball championship principles and procedures for
+  establishing the bracket}\ \APACbVolEdTR{}{\BTR{}}.
+\newblock
+\begin{APACrefURL}
+  \url{https://ncaaorg.s3.amazonaws.com/championships/sports/basketball/d1/women/D1WBB_BracketPrinciplesandProcedures.pdf}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

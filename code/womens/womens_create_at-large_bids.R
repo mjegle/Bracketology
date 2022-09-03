@@ -30,8 +30,7 @@ create_at_large_bids <- function(stat, this_date, this_season)
               pace = last(pace),
               ftf = last(ftf),
               ftf_opp = last(ftf_opp),
-              conference = last(conference),
-              avg_bids = last(avg_bids)) %>%
+              conference = last(conference)) %>%
     ungroup() %>%
     group_by(conference, year) %>%
     mutate(conf_avg_net = mean(net_rating))

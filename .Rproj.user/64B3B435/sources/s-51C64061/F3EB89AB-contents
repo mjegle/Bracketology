@@ -1,0 +1,5 @@
+###### COMBINE ALL STATS ######
+
+stats <- reb %>%
+  inner_join(record, by = c("team" = "team", "game_id" = "game_id"))
+

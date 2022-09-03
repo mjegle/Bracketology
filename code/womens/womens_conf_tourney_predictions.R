@@ -8,7 +8,7 @@
 library(tidyverse)
 library(randomForest)
 
-matchup_rf <- readRDS("../../data/womens/matchup_rf")
+matchup_rf <- readRDS("../../data/womens/womens_matchup_glm.RDS")
 
 # 
 # stats %>%
@@ -22,6 +22,7 @@ matchup_rf <- readRDS("../../data/womens/matchup_rf")
 
 
 #'
+#' NOTE: Now that we're predicting future events, we no longer need to use the lag function for the training data
 #'
 #' @param stats - the dataframe of stats by game played for each team
 #' @param conference - the conference we want to predict the outcome for
@@ -31,8 +32,10 @@ matchup_rf <- readRDS("../../data/womens/matchup_rf")
 #'
 predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
 {
+  # Predict an individual game
   predict_game_outcome <- function(team1, team2)
   {
+    # If either of the team names are empty, return the opposite
     if (team1 == "")
     {
       return(team2)
@@ -42,17 +45,33 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
       return(team1)
     }
     
+    # Gather the team's stats
     team1_data <- conf_stats %>%
       filter(team == team1)
     
     team2_data <- conf_stats %>%
       filter(team == team2)
     
+    # If there's NA data, remove it and return the opponent (this is very rare)
+    team1_data <- team1_data %>%
+      na.omit()
+    team2_data <- team2_data %>%
+      na.omit()
+    
+    if (nrow(team1_data) == 0)
+    {
+      return(team2)
+    }
+    if (nrow(team2_data) == 0)
+    {
+      return(team1)
+    }
+    
     colnames(team1_data) <- paste0("home_", colnames(team1_data))
     colnames(team2_data) <- paste0("away_", colnames(team2_data))
     
     input <- team1_data %>% bind_cols(team2_data) %>%
-      mutate(neutralSite = T)
+      mutate(neutral_site = T)
     
     
     team1_wp <- suppressWarnings(predict(matchup_glm, newdata = input, "response")[1])
@@ -126,6 +145,8 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
   seed9 <- ifelse(is_empty(seed9), "", seed9)
   seed8 <- ifelse(is_empty(seed8), "", seed8)
   seed7 <- ifelse(is_empty(seed7), "", seed7)
+  seed6 <- ifelse(is_empty(seed6), "", seed6)
+  seed5 <- ifelse(is_empty(seed5), "", seed5)
   
   champs <- c()
   
@@ -210,9 +231,3 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
   return(champ_probs)
 }
 
-#TODO - check the code to ensure consistency in game predictions
-
-# Testing purposes:
-tictoc::tic()
-test <- predict_conf_tournament(stats, "Big Ten", lubridate::ymd("2020-03-15"), 2020)
-tictoc::toc()

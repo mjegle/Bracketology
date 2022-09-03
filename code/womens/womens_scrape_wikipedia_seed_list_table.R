@@ -105,30 +105,43 @@ for (i in 2014:2022)
   }
 }
 
-# seeds <- seeds %>%
-#   mutate(School = str_trim(School),
-#          School = case_when(School == "Arkansas–Little Rock" ~ "Little Rock",
-#                             School == "Connecticut" ~ "UConn",
-#                             School == "Loyola" ~ "Loyola (MD)",
-#                             School == "LIU-Brooklyn" ~ "Long Island University",
-#                             School == "LIU Brooklyn" ~ "Long Island University",
-#                             School == "Long Island" ~ "Long Island University",
-#                             School == "Saint Mary's (CA)" ~ "Saint Mary's",
-#                             School == "Louisiana-Lafayette" ~ "Louisiana",
-#                             School == "Massachusetts" ~ "UMass",
-#                             School == "Mississippi" ~ "Ole Miss",
-#                             School == "North Carolina State" ~ "NC State",
-#                             School == "Hawaii" ~ "Hawai'i",
-#                             School == "Cal State Bakersfield" ~ "CSU Bakersfield",
-#                             School == "Miami (FL)" ~ "Miami",
-#                             School == "Cal State Fullerton" ~ "CSU Fullerton",
-#                             School == "College of Charleston" ~ "Charleston",
-#                             School == "Penn" ~ "Pennsylvania",
-#                             School == "Gardner–Webb" ~ "Gardner-Webb", # Weird different kind of dash
-#                             School == "Texas A&M–Corpus Christi" ~ "Texas A&M-CC",
-#                             School == "American" ~ "American University",
-#                             T ~ School))
-
+seeds <- seeds %>%
+  mutate(School = str_trim(School),
+         School = case_when(School == "American" ~ "American University",
+                            School == "Arizona St." ~ "Arizona State",
+                            School == "Arkansas-Little Rock" ~ "Little Rock",
+                            School == "Cal State Northridge" ~ "CSU Northridge",
+                            School == "Bethune–Cookman" ~ "Bethune-Cookman",
+                            School == "Central Ark." ~ "Central Arkansas",
+                            School == "Florida St." ~ "Florida State",
+                            School == "Grambling State" ~ "Grambling",
+                            School == "Hawaiʻi" ~ "Hawai'i",
+                            School == "Hawaii" ~ "Hawai'i",
+                            School == "Kansas St." ~ "Kansas State",
+                            School == "Long Beach St." ~ "Long Beach State",
+                            School == "Miami (FL)" ~ "Miami",
+                            School == "Miami (Florida)" ~ "Miami",
+                            School == "Michigan St." ~ "Michigan State",
+                            School == "Middle Tennessee State" ~ "Middle Tennessee",
+                            School == "Mississippi St." ~ "Mississippi State",
+                            School == "Montana St." ~ "Montana State",
+                            School == "New Mexico St." ~ "New Mexico State",
+                            School == "Nicholls State" ~ "Nicholls",
+                            School == "North Carolina St." ~ "NC State",
+                            School == "Ohio St." ~ "Ohio State",
+                            School == "Oregon St." ~ "Oregon State",
+                            School == "Penn" ~ "Pennsylvania",
+                            School == "Saint Francis (PA)" ~ "St. Francis (PA)",
+                            School == "Seattle" ~ "Seattle U",
+                            School == "St. Francis Brooklyn" ~ "St. Francis (BKN)",
+                            School == "St. Joseph's" ~ "Saint Joseph's",
+                            School == "Tennessee-Martin" ~ "UT Martin",
+                            School == "UNI" ~ "Northern Iowa",
+                            School == "Western Ill." ~ "Western Illinois",
+                            School == "Western Ky." ~ "Western Kentucky",
+                            School == "Connecticut" ~ "UConn",
+                            School == "South Fla." ~ "South Florida",
+                            T ~ School))
 
 write_csv(seeds, "../../data/womens/womens_tournament_seeds.csv")
 

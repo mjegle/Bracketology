@@ -5,13 +5,16 @@ First it's important to know how the selection process works. Teams that win the
 
 # Files
 
-All files are listed below in the order in which they are supposed to be run. All of the necessary intermediate data is in the data folder but I wanted to include all of this here so that this project is reproducible.
+All files are listed below in the order in which they are supposed to be run. All of the necessary intermediate data is in the data folder but I wanted to include all of this here so that this project is reproducible. Note that all files will follow the same structure, where mens files start with the "mens_" prefix and womens with the "womens_"
 
-- reb.R: This file calculates the rebounding rate for each team at a certain point in the season.
-
-- wins_losses.R: Finds win and loss splits for each team at a given point in the season. Total wins as well as wins against major conference teams, etc.
+- [mens/womens]_reb.R: This file calculates the rebounding rate for each team at a certain point in the season.
 
 - net_ratings_and_sos.R: Net ratings and strength of schedule calculations for each team.
 
 - teams_conf.R: Finds each team's conference by season. Needs to be by season since conference realignment exists.
 
+- ft_factor.R: Finds each team's free throw factor
+
+- pace.R: Finds each team's possessions / 40 minutes.
+
+- wins_losses.R: Finds win and loss splits for each team at a given point in the season. Total wins as well as wins against major conference teams, etc.

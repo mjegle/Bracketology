@@ -1,0 +1,2 @@
+This is the repo for my CMSAC research competition paper. I look at an analytics based bracketology. Using a variety of predictor variables, I filtered down to about 16-17 that are most important in determining which seed a team will get. In here I'll provide a brief description of the files, what they do, and the order in which they should be run. Note that the file names are identical for men's and women's.
+

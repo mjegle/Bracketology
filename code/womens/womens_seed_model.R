@@ -42,16 +42,19 @@ stats_seeds <- seeds %>%
 stats_seeds$Seed <- as.factor(stats_seeds$Seed)
 
 train <- stats_seeds %>%
-  filter(year <= 2021)
+  filter(year <= 2021) %>%
+  na.omit()
 
 test <- stats_seeds %>%
-  filter(year == 2022)
+  filter(year == 2022) %>%
+  na.omit()
 
 seed_rf <- randomForest(Seed ~ conf_wins + conf_losses + wins + losses + major_wins + major_losses + mid_major_wins +
                           mid_major_losses + o_reb_rate + d_reb_rate + off_rating + off_rating + def_rating + net_rating +
                           sos_off + sos_def + sos_net + to_rate_off + to_rate_def + steal_rate + opp_steal_rate + pace +
                           ftf + ftf_opp + conference,
-                        data = train)
+                        data = train,
+                        mtry = 10)
 
 saveRDS(seed_rf, "../../data/womens/womens_seed_rf.RDS")
 

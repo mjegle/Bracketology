@@ -1,0 +1,179 @@
+###### MODELING ######
+
+library(tidyverse)
+library(randomForest)
+library(xgboost)
+library(caret)
+library(Boruta)
+
+# TODO - Filter out stats that are in the NCAA tournament
+# stats_seeds <- stats_seeds %>%
+#   filter(year != 2020) %>%
+#   mutate(Seed = ifelse(is.na(Seed), 17, Seed),
+#          conference = as.factor(conference)) # DNQ is "17th" seed, just a place holder value, has no real meaning
+# 
+# stats_seeds <- stats_seeds %>%
+#   filter(num_game >= 15)
+# 
+# stats_seeds <- stats_seeds %>%
+#   mutate(Seed = Seed - 1) # This is because xgboost is odd and can only do classification with labels that are numeric.
+#                           # So instead each team actually earned a seed that was one higher than what's listed. 0 = 1 seed,
+#                           # 1 = 2 seed, ...., and 16 = DNQ
+# 
+# train <- stats_seeds %>%
+#   filter(year < 2022)
+# 
+# test <- stats_seeds %>%
+#   filter(year == 2022)
+# 
+# 
+# train_x <- train %>%
+#   select(num_game, o_reb_rate:opp_steal_rate) %>%
+#   data.matrix()
+# 
+# train_y <- train$Seed
+# 
+# test_x <- test %>%
+#   select(num_game, o_reb_rate:opp_steal_rate) %>%
+#   data.matrix()
+# 
+# test_y <- test$Seed
+# 
+# 
+# xgb_train <- xgb.DMatrix(data = train_x, label = train_y)
+# xgb_test <- xgb.DMatrix(data = test_x, label = test_y)
+# 
+# params = list(
+#   booster = "gbtree",
+#   eta = 0.001,
+#   max_depth = 4,
+#   gamma = 3,
+#   subsample = 0.75,
+#   colsample_bytree = 1,
+#   objective = "multi:softprob",
+#   eval_metric = "mlogloss",
+#   num_class = 17
+# )
+# 
+# seed_xgb <- xgboost(data = xgb_train,
+#                     params = params,
+#                     nrounds = 100)
+# 
+# summary(seed_xgb)
+# 
+# 
+# pred_test <- predict(seed_xgb, xgb_test, reshape = T)
+# 
+# pred_test <- pred_test %>%
+#   as.data.frame()
+# 
+# colnames(pred_test) <- c("prob_1_seed", "prob_2_seed", "prob_3_seed", "prob_4_seed", "prob_5_seed", "prob_6_seed", "prob_7_seed",
+#                          "prob_8_seed", "prob_9_seed", "prob_10_seed", "prob_11_seed", "prob_12_seed", "prob_13_seed", "prob_14_seed",
+#                          "prob_15_seed", "prob_16_seed", "prob_DNQ")
+# 
+# test <- test %>%
+#   bind_cols(pred_test)
+# 
+# duke <- test %>%
+#   filter(team == "Duke") %>%
+#   select(net_rating, num_game, sos_net, prob_1_seed:prob_DNQ)
+# 
+# test <- test %>%
+#   mutate(score = (16 * prob_1_seed) + (15 * prob_2_seed) + (14 * prob_3_seed) + (13 * prob_4_seed) + (12 * prob_5_seed) +
+#            (11 * prob_6_seed) + (10 * prob_7_seed) + (9 * prob_8_seed) + (8 * prob_9_seed) + (7 * prob_10_seed) +
+#            (6 * prob_11_seed) + (5 * prob_12_seed) + (4 * prob_13_seed) + (3 * prob_14_seed) + (2 * prob_15_seed) + (prob_16_seed))
+# 
+# test %>%
+#   group_by(team) %>%
+#   summarize(score = last(score)) %>%
+#   arrange(desc(score)) -> field
+# 
+# xgb.importance(model = seed_xgb)
+
+####### Try random forest ##########
+stats_seeds <- read_csv("../data/mens_stats_seeds.csv")
+
+stats_seeds <- stats_seeds %>%
+  filter(year != 2020) %>%
+  mutate(conference = as.factor(conference),
+         Seed = ifelse(is.na(Seed), "DNQ", Seed),
+         Seed = as.factor(Seed))
+
+train <- stats_seeds %>%
+  filter(year < 2022) %>%
+  select(team, Seed, num_game, o_reb_rate:opp_steal_rate)
+
+test <- stats_seeds %>%
+  filter(year == 2022) %>%
+  select(team, Seed, num_game, o_reb_rate:opp_steal_rate)
+
+tictoc::tic()
+
+seed_rf <- randomForest::randomForest(Seed ~ . - team, data = train)
+
+tictoc::toc()
+# tictoc::tic()
+# seed_rf_reduced <- randomForest::randomForest(Seed ~ net_rating + conference + off_rating + o_reb_rate + def_rating + sos_off +
+#                                                 sos_net + d_reb_rate + sos_def + steal_rate + major_wins + to_rate_off + 
+#                                                 to_rate_def + opp_steal_rate + nonconf_wins + nonconf_losses + major_neutral_wins +
+#                                                 num_game,
+#                                               data = train,
+#                                               mtry = 10)
+# tictoc::toc()
+importance <- randomForest::importance(seed_rf) %>%
+  as.data.frame()
+
+pred <- predict(seed_rf, test, type = "prob")
+
+pred_seed <- predict(seed_rf, newdata = test)
+table(pred_seed, test$Seed)
+
+pred <- pred %>%
+  as.data.frame()
+
+colnames(pred) <- c("prob_1_seed", "prob_2_seed", "prob_3_seed", "prob_4_seed", "prob_5_seed", "prob_6_seed", "prob_7_seed",
+                         "prob_8_seed", "prob_9_seed", "prob_10_seed", "prob_11_seed", "prob_12_seed", "prob_13_seed", "prob_14_seed",
+                         "prob_15_seed", "prob_16_seed", "prob_DNQ")
+
+test <- test %>%
+  bind_cols(pred)
+
+test_seeds <- test %>%
+  select(team, num_game, prob_1_seed:prob_DNQ)
+
+wtf <- test_seeds %>%
+  filter(team == "Princeton")
+
+test_seeds <- test_seeds %>%
+  mutate(score = (16 * prob_1_seed) + (15 * prob_2_seed) + (14 * prob_3_seed) + (13 * prob_4_seed) + (12 * prob_5_seed) +
+           (11 * prob_6_seed) + (10 * prob_7_seed) + (9 * prob_8_seed) + (8 * prob_9_seed) + (7 * prob_10_seed) +
+           (6 * prob_11_seed) + (5 * prob_12_seed) + (4 * prob_13_seed) + (3 * prob_14_seed) + (2 * prob_15_seed) + (prob_16_seed))
+
+test_seeds %>%
+  group_by(team) %>%
+  summarize(score = last(score),
+            prob_qual = 1 - last(prob_DNQ),
+            prob_1_seed = last(prob_1_seed),
+            prob_2_seed = last(prob_2_seed),
+            prob_3_seed = last(prob_3_seed),
+            prob_4_seed = last(prob_4_seed),
+            prob_5_seed = last(prob_5_seed)) %>%
+  arrange(desc(prob_5_seed)) %>%
+  arrange(desc(prob_4_seed)) %>%
+  arrange(desc(prob_3_seed)) %>%
+  arrange(desc(prob_2_seed)) %>%
+  arrange(desc(prob_1_seed)) -> field
+
+#### tune model #####
+
+
+
+###### Try KNN? #######
+
+
+# Will need to one hot encode the conference variable
+
+
+
+
+

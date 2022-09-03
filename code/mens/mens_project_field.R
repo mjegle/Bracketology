@@ -1,8 +1,16 @@
 ##### Project Field ######
+source("mens_conf_tourney_predictions.R")
+source("mens_create_at-large_bids.R")
+
+matchup_glm <- readRDS("../../data/mens/mens_matchup_glm.RDS")
+stats <- read_csv("../../data/mens/mens_stats.csv")
+seed_rf <- readRDS("../../data/mens/mens_seed_rf.RDS")
+at_large_rf <- readRDS("../../data/mens/mens_at_large_rf.RDS")
 
 project_field <- function(stat, this_date, this_season)
 {
   stat %>%
+    filter(year == this_season) %>%
     pull(conference) %>%
     unique() -> all_conferences
   
@@ -10,6 +18,7 @@ project_field <- function(stat, this_date, this_season)
   all_champs <- data.frame()
   for (i in all_conferences)
   {
+    print(i)
     conf_champs <- predict_conf_tournament(stat, i, this_date, this_season)
     conf_champs <- conf_champs
     all_champs <- all_champs %>%
@@ -43,8 +52,47 @@ project_field <- function(stat, this_date, this_season)
                             `At-Large` > 0.1 ~ "In The Hunt",
                             prob > 0 ~ "Must Win Conference Tournament",
                             T ~ "No Shot"))
+  top68 <- probs %>%
+    head(68)
   
-  return(probs)
+  pred_seed <- predict(seed_rf, newdata = top68) %>%
+    as.data.frame()
+  
+  pred <- predict(seed_rf, newdata = top68, type = "prob") %>%
+    as.data.frame()
+  
+  colnames(pred_seed) <- "pred_seed"
+  colnames(pred) <- paste0("seed_", colnames(pred))
+  
+  top68 <- top68 %>%
+    bind_cols(pred)
+  
+  top68 <- top68 %>%
+    bind_cols(pred_seed)
+  
+  top68 <- top68 %>%
+    arrange(desc(seed_16)) %>%
+    arrange(desc(seed_15)) %>%
+    arrange(desc(seed_14)) %>%
+    arrange(desc(seed_13)) %>%
+    arrange(desc(seed_12)) %>%
+    arrange(desc(seed_11)) %>%
+    arrange(desc(seed_10)) %>%
+    arrange(desc(seed_9)) %>%
+    arrange(desc(seed_8)) %>%
+    arrange(desc(seed_7)) %>%
+    arrange(desc(seed_6)) %>%
+    arrange(desc(seed_5)) %>%
+    arrange(desc(seed_4)) %>%
+    arrange(desc(seed_3)) %>%
+    arrange(desc(seed_2)) %>%
+    arrange(desc(seed_1)) %>%
+    arrange(pred_seed) %>%
+    select(-index)
+  
+  top68 <- top68 %>%
+    mutate(rank = 1:n())
+  
+  return(top68)
 }
 
-test_field <- project_field(stats, lubridate::ymd("2022-03-10"), 2022)

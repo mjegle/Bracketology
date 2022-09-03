@@ -1,0 +1,55 @@
+###### MODELING ######
+
+library(xgboost)
+
+stats_seeds <- stats_seeds %>%
+  filter(year != 2020) %>%
+  mutate(Seed = as.factor(Seed))
+
+train <- stats_seeds %>%
+  filter(year < 2022)
+
+test <- stats_seeds %>%
+  filter(year == 2022)
+
+
+train_x <- train %>%
+  select(num_game, o_reb_rate, d_reb_rate, total_wins, total_losses, off_rating, def_rating, net_rating,
+         sos_off, sos_def, sos_net) %>%
+  data.matrix()
+
+train_y <- train$Seed
+
+test_x <- test %>%
+  select(num_game, o_reb_rate, d_reb_rate, total_wins, total_losses, off_rating, def_rating, net_rating,
+         sos_off, sos_def, sos_net) %>%
+  data.matrix()
+
+test_y <- test$Seed
+
+
+xgb_train <- xgb.DMatrix(data = train_x, label = train_y)
+xgb_test <- xgb.DMatrix(data = test_x, label = test_y)
+
+num_class <- length(levels(stats_seeds$Seed))
+
+params = list(
+  booster = "gbtree",
+  eta = 0.001,
+  max_depth = 4,
+  gamma = 3,
+  subsample = 0.75,
+  colsample_bytree = 1,
+  objective = "multi:softprob",
+  eval_metric = "mlogloss",
+  num_class = num_class
+)
+
+seed_xgb <- xgboost(data = xgb_train,
+                    params = params,
+                    nrounds = 100)
+
+summary(seed_xgb)
+
+pred_test <- predict(seed_xgb, xgb_test)
+

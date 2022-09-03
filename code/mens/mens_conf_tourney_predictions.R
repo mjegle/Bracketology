@@ -8,7 +8,6 @@
 library(tidyverse)
 library(randomForest)
 
-matchup_rf <- readRDS("../../data/mens/matchup_rf")
 
 # 
 # stats %>%
@@ -213,6 +212,3 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
 #TODO - check the code to ensure consistency in game predictions
 
 # Testing purposes:
-tictoc::tic()
-test <- predict_conf_tournament(stats, "Big Ten", lubridate::ymd("2020-03-15"), 2020)
-tictoc::toc()
