@@ -17,4 +17,34 @@ All files are listed below in the order in which they are supposed to be run. Al
 
 - pace.R: Finds each team's possessions / 40 minutes.
 
+- conferences.R: Finds each team's conference by season
+
 - wins_losses.R: Finds win and loss splits for each team at a given point in the season. Total wins as well as wins against major conference teams, etc.
+
+- find_reb_rates.R: Calculates team's offensive and defensive rebounding rates
+
+- to_rates.R: Calculates each team's turnover rates on offense and defense
+
+- steal_rates.R: Calculates offensive and defensive steal rates for each team
+
+- game_type.R: Finds which game type a game was (regular season, conf. Tournament, NCAA tournament, etc)
+
+- ft_factor.R: Calculates free throw factor for each team
+
+- conf_bids.R: (Ended up not using this since it would essentially be cheating), calculates each conference's average number of NCAA tournament bids per year. Uses response variable as a predictor so it would make our model results overly optimistic
+
+- combine_team_stats.R: Combines stats that were created from all of the above files
+
+- combine_stats_and_seeds.R: Combines all team stats with their seed and berth type in the NCAA tournament that year
+
+- head_to_head_model.R: Trains a head to head matchup model between two given teams
+
+- conf_tourney_predictions.R: Simulates conference tournament 100 times and returns probability of each team winning
+
+- mens_at_large_modeling.R: Trains at-large bid model
+
+- create_at-large_bids.R: Generates probability for all given teams to receive an at-large bid
+
+- seed_model.R: Trains model for seeding all 68 teams in the projected field
+
+- project_field.R: Finalizes field of 68 teams in the projected tournament

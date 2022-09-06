@@ -5,7 +5,9 @@ account: michaelegle
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6911536
-bundleId: 6264725
+bundleId: 6264773
 url: https://michaelegle.shinyapps.io/michael-egle-bracketology/
-when: 1662172975.03631
-lastSyncTime: 1662172975.03632
+when: 1662175227.89405
+lastSyncTime: 1662175227.89407
+asMultiple: FALSE
+asStatic: FALSE

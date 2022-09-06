@@ -1,7 +1,16 @@
 ####### Create the At-Large Bids ######
 
+# Load in the at_large_rf model
 at_large_rf <- readRDS("../../data/mens/mens_at_large_rf")
 
+#'
+#'
+#' @param stat: season cumulative stats
+#' @param this_date: the date you want to generate at-large bids on
+#' @param this_season: the current season (year in which that season's tournament ends)
+#'
+#' @return probs: the probability of receiving an at-large bid for every team in stat
+#'
 create_at_large_bids <- function(stat, this_date, this_season)
 {
   stat <- stat %>%

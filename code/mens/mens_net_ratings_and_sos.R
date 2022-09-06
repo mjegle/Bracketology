@@ -13,6 +13,7 @@
 library(hoopR)
 library(tidyverse)
 
+# Load in all data #
 data <- data.frame()
 
 for (i in 2011:2022)
@@ -21,9 +22,12 @@ for (i in 2011:2022)
     bind_rows(load_mbb_team_box(i) %>% mutate(year = i))
 }
 
+# Keep the necessary columns
 data <- data %>%
   select(team = team_location, game_id, game_date, field_goals_made_field_goals_attempted:fouls, year)
 
+# Separate field goal and free throw columns so we have one column for made and one for attempted
+# Then make the columns into numeric
 data <- data %>%
   separate(field_goals_made_field_goals_attempted, into = c("fgm", "fga"), sep = "-") %>%
   separate(three_point_field_goals_made_three_point_field_goals_attempted, into = c("fgm3", "fga3"), sep = "-") %>%
@@ -33,23 +37,26 @@ data <- data %>%
 
 # Going to use kenpom's approximation for possessions listed here: https://kenpom.com/blog/the-possession/#:~:text=The%20most%20common%20formula%20for,and%20FTA%20%3D%20free%20throw%20attempts.
 
-
-
+# Find the points scored by the team
 data <- data %>%
   mutate(fgm2 = fgm - fgm3,
          fga2 = fga - fga3,
          points = (ftm) + (2 * fgm2) + (3 * fgm3))
 
+# Add the opponent data
 data <- data %>%
   inner_join(data, suffix = c("", "_opp"), by = "game_id")
 
+# Filter out instances of a team being joined with itself
 data <- data %>%
   filter(team != team_opp)
 
+# estimate the number of possessions
 data <- data %>%
   mutate(possessions = round((fga - offensive_rebounds) + turnovers + (0.44 * fta)),
          possessions_opp = round((fga_opp - offensive_rebounds_opp) + turnovers_opp + (0.44 * fta_opp)))
 
+# find number of cumulative points and calculate the offensive rating
 data <- data %>%
   arrange(game_date) %>%
   group_by(team, year) %>%
@@ -58,9 +65,11 @@ data <- data %>%
          net_rating = off_rating - def_rating) %>%
   ungroup()
 
+# keep necessary columns
 net <- data %>%
   select(team, game_id, off_rating, def_rating, net_rating)
 
+# Now find average opponents offensive rating
 data <- data %>%
   group_by(team_opp, year) %>%
   mutate(opp_off_rating = cumsum(points_opp) / cumsum(possessions_opp) * 100,
@@ -73,9 +82,11 @@ data <- data %>%
          sos_net = cummean(opp_net_rating)) %>%
   ungroup()
 
+# Keep necessary columns
 sos <- data %>%
   select(team, game_id, sos_off, sos_def, sos_net)
 
+# Save as CSV files
 write_csv(net, "../../data/mens/mens_net_ratings.csv")
 write_csv(sos, "../../data/mens/mens_sos_ratings.csv")
 

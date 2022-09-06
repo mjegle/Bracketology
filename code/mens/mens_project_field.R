@@ -7,8 +7,17 @@ stats <- read_csv("../../data/mens/mens_stats.csv")
 seed_rf <- readRDS("../../data/mens/mens_seed_rf.RDS")
 at_large_rf <- readRDS("../../data/mens/mens_at_large_rf.RDS")
 
+#'
+#' FInds the projected field of 68 at a given date in the season
+#' @param stat: the season's cumulative stats
+#' @param this_date: the date on which to project the season
+#' @param this_season: the season we are predicting in
+#' 
+#' @return top68: the field of 68 in order
+#'
 project_field <- function(stat, this_date, this_season)
 {
+  # Gather all of the conferences in the given season
   stat %>%
     filter(year == this_season) %>%
     pull(conference) %>%
@@ -25,11 +34,14 @@ project_field <- function(stat, this_date, this_season)
       bind_rows(conf_champs)
   }
   
+  # Find the at large probabilities for each team
   at_large_bids <- create_at_large_bids(stat, this_date, this_season)
   
+  # combine the at large probabilities and conference champ probabilities
   probs <- at_large_bids %>%
     left_join(all_champs, by = c("team" = "team"))
   
+  # Find the projected champion for each conference
   probs <- probs %>%
     mutate(prob = ifelse(is.na(prob), 0, prob)) %>%
     group_by(conference) %>%
@@ -37,11 +49,12 @@ project_field <- function(stat, this_date, this_season)
     ungroup() %>%
     mutate(projected_champ = ifelse(prob == max_prob, 1, 0))
   
+  # Arrange the data by the top 32 conference champs and the top 36 at large probabilities of the remaining teams
   probs <- probs %>%
     arrange(desc(`At-Large`)) %>%
     arrange(desc(projected_champ))
     
-  
+  # Add the teams overall rankings and a comment about their standing
   probs <- probs %>%
     mutate(index = 1:n(),
            desc = case_when(index < 61 ~ "In",
@@ -52,24 +65,30 @@ project_field <- function(stat, this_date, this_season)
                             `At-Large` > 0.1 ~ "In The Hunt",
                             prob > 0 ~ "Must Win Conference Tournament",
                             T ~ "No Shot"))
+  # Take the top 68
   top68 <- probs %>%
     head(68)
   
+  # find each team's most likely seed
   pred_seed <- predict(seed_rf, newdata = top68) %>%
     as.data.frame()
   
+  # find each team's seed distribution
   pred <- predict(seed_rf, newdata = top68, type = "prob") %>%
     as.data.frame()
   
+  # update column names for prediction data frames
   colnames(pred_seed) <- "pred_seed"
   colnames(pred) <- paste0("seed_", colnames(pred))
   
+  # add the prediction data frames
   top68 <- top68 %>%
     bind_cols(pred)
   
   top68 <- top68 %>%
     bind_cols(pred_seed)
   
+  # arrange and rank the teams one more time
   top68 <- top68 %>%
     arrange(desc(seed_16)) %>%
     arrange(desc(seed_15)) %>%
@@ -93,6 +112,7 @@ project_field <- function(stat, this_date, this_season)
   top68 <- top68 %>%
     mutate(rank = 1:n())
   
+  # Return the field of 68
   return(top68)
 }
 

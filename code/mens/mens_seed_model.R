@@ -3,9 +3,11 @@
 library(tidyverse)
 library(randomForest)
 
+# Load in data
 seeds <- read_csv("../../data/mens/mens_tournament_seeds.csv")
 stats <- read_csv("../../data/mens/mens_stats.csv")
 
+# Find each team's most recent season long stats
 last_stats <- stats %>%
   group_by(team, year) %>%
   summarize(conf_wins = last(conf_wins),
@@ -36,17 +38,23 @@ last_stats <- stats %>%
 
 # Will need to solve the american university issue later
 
+# Join in the seed data
 stats_seeds <- seeds %>%
   inner_join(last_stats, by = c("School" = "team", "year" = "year"))
 
+# Make the seed a factor since we're doing classification
 stats_seeds$Seed <- as.factor(stats_seeds$Seed)
 
+# train on years before 2022
 train <- stats_seeds %>%
   filter(year <= 2021)
 
+# Test data is 2022
 test <- stats_seeds %>%
   filter(year == 2022)
 
+
+# Train the model
 seed_rf <- randomForest(Seed ~ conf_wins + conf_losses + wins + losses + major_wins + major_losses + mid_major_wins +
                           mid_major_losses + o_reb_rate + d_reb_rate + off_rating + off_rating + def_rating + net_rating +
                           sos_off + sos_def + sos_net + to_rate_off + to_rate_def + steal_rate + opp_steal_rate + pace +
@@ -54,6 +62,7 @@ seed_rf <- randomForest(Seed ~ conf_wins + conf_losses + wins + losses + major_w
                         data = train,
                         mtry = 10)
 
+# save the model to use later
 saveRDS(seed_rf, "../../data/mens/mens_seed_rf.RDS")
 # 
 # pred <- predict(seed_rf, newdata = test, type = "prob") %>%

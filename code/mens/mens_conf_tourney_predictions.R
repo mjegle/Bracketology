@@ -30,6 +30,7 @@ library(randomForest)
 #'
 predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
 {
+  # Predict an individual game 100 times
   predict_game_outcome <- function(team1, team2)
   {
     if (team1 == "")
@@ -41,22 +42,26 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
       return(team1)
     }
     
+    # Gather each team's stats
     team1_data <- conf_stats %>%
       filter(team == team1)
     
     team2_data <- conf_stats %>%
       filter(team == team2)
     
+    # Update the column names to match the predictor variables for the model
     colnames(team1_data) <- paste0("home_", colnames(team1_data))
     colnames(team2_data) <- paste0("away_", colnames(team2_data))
     
+    # create the new data
     input <- team1_data %>% bind_cols(team2_data) %>%
       mutate(neutralSite = T)
     
-    
+    # Simulate the game
     team1_wp <- suppressWarnings(predict(matchup_glm, newdata = input, "response")[1])
     rand <- runif(1)
     
+    # Return the winning team
     if (team1_wp <= rand)
     {
       return(team2)
@@ -67,6 +72,7 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
     }
   }
   
+  # Get all team's most up to date stats
   conf_stats <- stat %>%
     filter(game_date < this_date, conference == this_conference, year == this_year) %>%
     group_by(team) %>%
@@ -89,12 +95,15 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
               ftf_opp = last(ftf_opp)) %>%
     mutate(conference = this_conference)
   
+  # Create the conference standings
   standings <- conf_stats %>%
     arrange(desc(conf_wins)) %>%
     mutate(conf_seed = 1:n())
   
+  # Find the number of teams in the conference
   num_teams <- max(standings$conf_seed)
   
+  # Get all the team names
   seed16 <- standings %>% filter(conf_seed == 16) %>% pull(team)
   seed15 <- standings %>% filter(conf_seed == 15) %>% pull(team)
   seed14 <- standings %>% filter(conf_seed == 14) %>% pull(team)
@@ -126,12 +135,16 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
   seed8 <- ifelse(is_empty(seed8), "", seed8)
   seed7 <- ifelse(is_empty(seed7), "", seed7)
   
+  # Initialize the empty champions list
   champs <- c()
   
+  # Simulate 100 games at a time for the first round of 16 game
+  # If there is no 16 seed, this will just return the 1 seed 100 times
   playin1_winner <- furrr::future_pmap(.l = list(rep(seed1, 100), rep(seed16, 100)),
                                        .f = predict_game_outcome,
                                        .options = furrr::furrr_options(seed = TRUE))
   
+  # Same process as above
   playin2_winner <- furrr::future_pmap(.l = list(rep(seed8, 100), rep(seed9, 100)),
                                        .f = predict_game_outcome,
                                        .options = furrr::furrr_options(seed = TRUE))
@@ -193,12 +206,14 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
                                    .f = predict_game_outcome,
                                    .options = furrr::furrr_options(seed = TRUE))
 
+  # Make the champs list into a data frame
   champs <- champs %>%
     unlist() %>%
     as.data.frame()
   
   colnames(champs)[1] <- "team"
   
+  # Aggregate by team
   champ_probs <- champs %>%
     group_by(team) %>%
     count() %>%
@@ -206,9 +221,7 @@ predict_conf_tournament <- function(stat, this_conference, this_date, this_year)
     select(team, prob) %>%
     arrange(desc(prob))
   
+  # Return the probabilities
   return(champ_probs)
 }
 
-#TODO - check the code to ensure consistency in game predictions
-
-# Testing purposes:

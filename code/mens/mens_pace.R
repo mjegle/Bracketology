@@ -4,10 +4,9 @@
 library(hoopR)
 library(tidyverse)
 
+# Load in data #
 data <- data.frame()
 schedule <- data.frame()
-
-test <- load_mbb_schedule(2022)
 
 for (i in 2011:2022)
 {
@@ -21,6 +20,7 @@ for (i in 2011:2022)
                 mutate(id = as.integer(id)))
 }
 
+# only keep the useful columns and split between home and away teams
 home <- schedule %>%
   select(id, team = home.location, neutralSite, conferenceCompetition, game_result = status.type.detail) %>%
   mutate(home = T)
@@ -29,12 +29,15 @@ away <- schedule %>%
   select(id, team = away.location, neutralSite, conferenceCompetition, game_result = status.type.detail) %>%
   mutate(home = F)
 
+# Combine the home and away observations
 schedule <- home %>%
   bind_rows(away)
 
+# Get rid of data we don't need
 data <- data %>%
   select(team = team_location, game_id, game_date, turnovers, steals, field_goals_made_field_goals_attempted:fouls, year)
 
+# separate field goal data into attempts and makes
 data <- data %>%
   separate(field_goals_made_field_goals_attempted, into = c("fgm", "fga"), sep = "-") %>%
   separate(three_point_field_goals_made_three_point_field_goals_attempted, into = c("fgm3", "fga3"), sep = "-") %>%
@@ -45,18 +48,21 @@ data <- data %>%
 # Going to use kenpom's approximation for possessions listed here: https://kenpom.com/blog/the-possession/#:~:text=The%20most%20common%20formula%20for,and%20FTA%20%3D%20free%20throw%20attempts.
 
 
-
+# Find the 2 pt field goals and points
 data <- data %>%
   mutate(fgm2 = fgm - fgm3,
          fga2 = fga - fga3,
          points = (ftm) + (2 * fgm2) + (3 * fgm3))
 
+# add opponent data
 data <- data %>%
   inner_join(data, suffix = c("", "_opp"), by = "game_id")
 
+# Filter out teams joined with themselves
 data <- data %>%
   filter(team != team_opp)
 
+# Add possessions
 data <- data %>%
   mutate(possessions = round((fga - offensive_rebounds) + turnovers + (0.44 * fta)),
          possessions_opp = round((fga_opp - offensive_rebounds_opp) + turnovers_opp + (0.44 * fta_opp))) %>%
@@ -64,9 +70,11 @@ data <- data %>%
 
 # Want it to be possessions per 40 minutes
 
+# Add the schedule data
 data <- data %>%
   inner_join(schedule, by = c("team" = "team", "game_id" = "id"))
 
+# Find how long each game was 
 data <- data %>%
   mutate(minutes = case_when(game_result == "Final" ~ 40,
                              game_result == "Final/OT" ~ 45,
@@ -78,15 +86,18 @@ data <- data %>%
                              game_result == "Final/7OT" ~ 75,
                              game_result == "Final/8OT" ~ 80)) # Just in case
 
+# Calculate cumulative possessions per 40 minutes
 data <- data %>%
   group_by(team, year) %>%
   mutate(total_minutes = cumsum(minutes),
          total_possessions = cumsum(possessions),
          pace = total_possessions / total_minutes * 40)
 
+# select just the game id, team, and pace
 data <- data %>%
   ungroup() %>%
   select(game_id, team, pace)
 
+# Save as a csv
 write_csv(data, "../../data/mens/mens_team_pace.csv")
 

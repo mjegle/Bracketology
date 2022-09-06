@@ -1,10 +1,11 @@
 ##### COMBINE STATS AND SEEDS ########
 
 library(tidyverse)
-
+# Load in data
 stats <- read_csv("../../data/mens/mens_stats.csv")
 seeds <- read_csv("../../data/mens/mens_tournament_seeds.csv")
 
+# Clean up names to match wehoop/hoopR
 seeds <- seeds %>%
   mutate(School = str_trim(School),
          School = case_when(School == "Arkansas–Little Rock" ~ "Little Rock",
@@ -29,9 +30,11 @@ seeds <- seeds %>%
                             School == "American" ~ "American University",
                             T ~ School))
 
+# Join data sets
 stats_seeds <- stats %>%
   left_join(seeds, by = c("team" = "School", "year" = "year"))
 
+# Save data
 write_csv(stats_seeds, "../../data//mens/mens_stats_seeds.csv")
 
 

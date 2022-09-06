@@ -1,5 +1,6 @@
 ##### Men's results check ######
 
+# Test how many teams the model correctly placed in the field of 68 as of march 1st of the given year
 seeds <- read_csv("../../data/mens/mens_tournament_seeds.csv")
 
 for (i in 2011:2022)

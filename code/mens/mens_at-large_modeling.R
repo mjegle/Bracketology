@@ -3,10 +3,11 @@
 library(tidyverse)
 library(randomForest)
 
-
+# Load in data
 stats <- read_csv("../../data/mens/mens_stats.csv")
 seeds <- read_csv("../../data//mens/mens_tournament_seeds.csv")
 
+# Change the school names in case
 seeds <- seeds %>%
   mutate(School = str_trim(School),
          School = case_when(School == "Arkansas–Little Rock" ~ "Little Rock",
@@ -36,6 +37,7 @@ seeds <- seeds %>%
                            Berth == "Auto" ~ "Automatic",
                            T ~ Berth))
 
+# Take the final stats of each team
 stats <- stats %>%
   group_by(team, year) %>%
   summarize(conf_wins = last(conf_wins),
@@ -66,42 +68,44 @@ stats <- stats %>%
   group_by(conference, year) %>%
   mutate(conf_avg_net = mean(net_rating))
 
+# Join in the seed data
 stats_seeds <- stats %>%
   left_join(seeds, by = c("team" = "School", "year" = "year"))
 
+# Update the NA values on 
 stats_seeds <- stats_seeds %>%
   mutate(Berth = ifelse(is.na(Berth), "DNQ", Berth),
          Seed = ifelse(is.na(Seed), "DNQ", Seed))
 
+# Filter out auto bids
 stats_seeds <- stats_seeds %>%
   filter(Berth != "Automatic")
 
 ###### Create the model #####
 
+# make the response a factor
 stats_seeds$Berth <- as.factor(stats_seeds$Berth)
 
+# Create our training data
 train <- stats_seeds %>%
   filter(year < 2022, year != 2020) %>% # can't include 2020 since there was no tournament that year
   ungroup() %>%
   select(-c(team, year, Seed))
 
+# Create our testing data
 test <- stats_seeds %>%
   filter(year == 2022) %>%
   ungroup() %>%
   select(-c(team, year, Seed))
 
+# Train the model
 at_large_rf <- randomForest(Berth ~ conf_wins + conf_losses + wins + losses + major_wins + major_losses + mid_major_wins +
                               mid_major_losses + o_reb_rate + d_reb_rate + off_rating + off_rating + def_rating + net_rating +
                               sos_off + sos_def + sos_net + to_rate_off + to_rate_def + steal_rate + opp_steal_rate + pace +
                               ftf + ftf_opp + conference, data = train,
                             mtry = 10)
-pred <- predict(at_large_rf, newdata = test, type = "prob")
 
+# Save the model
 saveRDS(at_large_rf, "../../data/mens/mens_at_large_rf.RDS")
 
-pred <- pred %>%
-  as.data.frame()
-
-test <- test %>%
-  bind_cols(pred)
 

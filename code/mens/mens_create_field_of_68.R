@@ -1,5 +1,6 @@
 ##### Create field of 68 #####
 
+# Load in the seed random forest model
 seed_rf <- readRDS("../../data/mens/mens_seed_rf.RDS")
 
 create_field_of_68 <- function(teams)

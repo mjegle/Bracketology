@@ -2,6 +2,7 @@ library(shiny)
 library(gt)
 library(tidyverse)
 library(dplyr)
+library(rsconnect)
 # Create the user interface
 ui <- fluidPage(
   titlePanel("Bracketology"),
@@ -182,6 +183,4 @@ server <- function(input, output, session) {
   })
 }
 
-
-#shinyApp(ui = ui, server = server)
-deployApp(appName = "michael-egle-bracketology")
+shinyApp(ui = ui, server = server)

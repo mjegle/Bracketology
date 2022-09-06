@@ -5,6 +5,7 @@
 
 library(hoopR)
 
+# Load in all game data
 data <- data.frame()
 
 for (i in 2011:2022)
@@ -26,8 +27,10 @@ for (i in 2011:2022)
 # 35: CIT
 # 42: basketball classic
 
+# Only keep games that were not in the NCAA, CBI, NIT, CIT, or basketball classic
 data <- data %>%
   filter(is.na(tournamentId) | !(tournamentId %in% c(22, 11, 21, 35, 42))) %>%
   select(id, tournamentId)
 
+# Save as a csv
 write_csv(data, "../../data/mens/mens_eligible_game_ids.csv")

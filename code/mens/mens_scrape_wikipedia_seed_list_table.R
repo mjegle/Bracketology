@@ -15,14 +15,16 @@ scrape_wikipedia_seed_list_table <- function(yr)
   # These all follow the same URL structure
   url <- paste0("https://en.wikipedia.org/wiki/", yr, "_NCAA_Division_I_Men%27s_Basketball_Tournament")
   
+  # When using the html_table function, each wikipedia page has a slightly different layout
+  # So we have to break it up a little
   html <- read_html(url)
   if (yr %in% c(2014, 2019:2021))
   {
-    tables <- html_table(html)[5:8] %>%
+    tables <- html_table(html)[5:8] %>% # take tables 5-8 and make them data frames
       lapply(as.data.frame)
   } else if (yr %in% c(2015, 2016, 2017, 2018))
   {
-    tables <- html_table(html)[4:7] %>%
+    tables <- html_table(html)[4:7] %>% # take tables 4-7 and make the m data frames
       lapply(as.data.frame)
   } else if (yr %in% c(2013))
   {
@@ -34,7 +36,7 @@ scrape_wikipedia_seed_list_table <- function(yr)
       t <- tables[[i]]
       colnames(tables[[i]]) <- t[1,]
       tables[[i]] <- tables[[i]] %>%
-        filter(Seed != "Seed")
+        filter(Seed != "Seed") # Get rid of games that have a 
     }
   }
   else if (yr %in% c(2011, 2012))
