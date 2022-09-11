@@ -11,12 +11,12 @@ ui <- fluidPage(
     navbarPage("App and Analysis by Michael Egle (@deceptivespeed_ on Twitter)",
                tabPanel("Men's",
                         fluidRow(
-                          numericInput("year", "Year of Tournament", min = 2011, max = 2022, value = 2022),
+                          numericInput("mens_year", "Year of Tournament", min = 2011, max = 2022, value = 2022),
                           tableOutput(outputId = "mens_tournament_table")
                         )),
                tabPanel("Women's",
                         fluidRow(
-                          numericInput("year", "Year of Tournament", min = 2014, max = 2022, value = 2022),
+                          numericInput("womens_year", "Year of Tournament", min = 2014, max = 2022, value = 2022),
                           tableOutput(outputId = "womens_tournament_table")
                         )))
   )
@@ -48,44 +48,79 @@ server <- function(input, output, session) {
   mens_logos <- read_csv("mens_logos.csv")
   womens_logos <- read_csv("womens_logos.csv")
   
+  m_data <- m11 %>%
+    bind_rows(m12) %>%
+    bind_rows(m13) %>%
+    bind_rows(m14) %>%
+    bind_rows(m15) %>%
+    bind_rows(m16) %>%
+    bind_rows(m17) %>%
+    bind_rows(m18) %>%
+    bind_rows(m19) %>%
+    bind_rows(m21) %>%
+    bind_rows(m22)
+  
+  w_data <- w14 %>%
+    bind_rows(w15) %>%
+    bind_rows(w16) %>%
+    bind_rows(w17) %>%
+    bind_rows(w18) %>%
+    bind_rows(w19) %>%
+    bind_rows(w21) %>%
+    bind_rows(w22)
+  
+  print(w_data)
+  
+  
+  m_data <- m_data %>%
+    inner_join(mens_logos)
+  
+  w_data <- w_data %>%
+    inner_join(womens_logos)
+  
+  m_data <- m_data %>%
+    dplyr::select(logo, team, rank, year) %>%
+    mutate(seed = case_when(rank < 5 ~ 1,
+                            rank >= 5 & rank < 9 ~ 2,
+                            rank >= 9 & rank < 13 ~ 3,
+                            rank >= 13 & rank < 17 ~ 4,
+                            rank >= 17 & rank < 21 ~ 5,
+                            rank >= 21 & rank < 25 ~ 6,
+                            rank >= 25 & rank < 29 ~ 7,
+                            rank >= 29 & rank < 33 ~ 8,
+                            rank >= 33 & rank < 37 ~ 9,
+                            rank >= 37 & rank < 41 ~ 10,
+                            rank >= 41 & rank < 45 ~ 11,
+                            rank >= 45 & rank < 51 ~ 12,
+                            rank >= 51 & rank < 55 ~ 13,
+                            rank >= 55 & rank < 59 ~ 14,
+                            rank >= 59 & rank < 63 ~ 15,
+                            rank >= 63 ~ 16))
+  
+  w_data <- w_data %>%
+    dplyr::select(logo, team, rank, year) %>%
+    mutate(seed = case_when(rank < 5 ~ 1,
+                            rank >= 5 & rank < 9 ~ 2,
+                            rank >= 9 & rank < 13 ~ 3,
+                            rank >= 13 & rank < 17 ~ 4,
+                            rank >= 17 & rank < 21 ~ 5,
+                            rank >= 21 & rank < 25 ~ 6,
+                            rank >= 25 & rank < 29 ~ 7,
+                            rank >= 29 & rank < 33 ~ 8,
+                            rank >= 33 & rank < 37 ~ 9,
+                            rank >= 37 & rank < 41 ~ 10,
+                            rank >= 41 & rank < 45 ~ 11,
+                            rank >= 45 & rank < 51 ~ 12,
+                            rank >= 51 & rank < 55 ~ 13,
+                            rank >= 55 & rank < 59 ~ 14,
+                            rank >= 59 & rank < 63 ~ 15,
+                            rank >= 63 ~ 16))
+  
   output$mens_tournament_table <- render_gt({
-    
-    data <- m11 %>%
-      bind_rows(m12) %>%
-      bind_rows(m13) %>%
-      bind_rows(m14) %>%
-      bind_rows(m15) %>%
-      bind_rows(m16) %>%
-      bind_rows(m17) %>%
-      bind_rows(m18) %>%
-      bind_rows(m19) %>%
-      bind_rows(m21) %>%
-      bind_rows(m22) %>%
-      filter(year == input$year)
-    
-    data <- data %>%
-      inner_join(mens_logos)
-    
-    data <- data %>%
-      dplyr::select(logo, team, rank) %>%
-      mutate(seed = case_when(rank < 5 ~ 1,
-                              rank >= 5 & rank < 9 ~ 2,
-                              rank >= 9 & rank < 13 ~ 3,
-                              rank >= 13 & rank < 17 ~ 4,
-                              rank >= 17 & rank < 21 ~ 5,
-                              rank >= 21 & rank < 25 ~ 6,
-                              rank >= 25 & rank < 29 ~ 7,
-                              rank >= 29 & rank < 33 ~ 8,
-                              rank >= 33 & rank < 37 ~ 9,
-                              rank >= 37 & rank < 41 ~ 10,
-                              rank >= 41 & rank < 45 ~ 11,
-                              rank >= 45 & rank < 51 ~ 12,
-                              rank >= 51 & rank < 55 ~ 13,
-                              rank >= 55 & rank < 59 ~ 14,
-                              rank >= 59 & rank < 63 ~ 15,
-                              rank >= 63 ~ 16))
-    
-    data %>%
+
+    m_data %>%
+      filter(year == input$mens_year) %>%
+      select(-year) %>%
       gt() %>%
       text_transform(locations = cells_body(c(logo)),
                      fn = function(x)
@@ -106,64 +141,9 @@ server <- function(input, output, session) {
   
   output$womens_tournament_table <- render_gt({
     
-    data <- w14 %>%
-      bind_rows(w15) %>%
-      bind_rows(w16) %>%
-      bind_rows(w17) %>%
-      bind_rows(w18) %>%
-      bind_rows(w19) %>%
-      bind_rows(w21) %>%
-      bind_rows(w22) %>%
-      filter(year == input$year)
-    
-    data <- data %>%
-      inner_join(womens_logos)
-    
-    if (input$year == 2022)
-    {
-      data <- data %>%
-        dplyr::select(logo, team, rank) %>%
-        mutate(seed = case_when(rank < 5 ~ 1,
-                                rank >= 5 & rank < 9 ~ 2,
-                                rank >= 9 & rank < 13 ~ 3,
-                                rank >= 13 & rank < 17 ~ 4,
-                                rank >= 17 & rank < 21 ~ 5,
-                                rank >= 21 & rank < 25 ~ 6,
-                                rank >= 25 & rank < 29 ~ 7,
-                                rank >= 29 & rank < 33 ~ 8,
-                                rank >= 33 & rank < 37 ~ 9,
-                                rank >= 37 & rank < 41 ~ 10,
-                                rank >= 41 & rank < 45 ~ 11,
-                                rank >= 45 & rank < 51 ~ 12,
-                                rank >= 51 & rank < 55 ~ 13,
-                                rank >= 55 & rank < 59 ~ 14,
-                                rank >= 59 & rank < 63 ~ 15,
-                                rank >= 63 ~ 16))
-    }
-    if (input$year != 2022)
-    {
-      data <- data %>%
-        dplyr::select(logo, team, rank) %>%
-        mutate(seed = case_when(rank < 5 ~ 1,
-                                rank >= 5 & rank < 9 ~ 2,
-                                rank >= 9 & rank < 13 ~ 3,
-                                rank >= 13 & rank < 17 ~ 4,
-                                rank >= 17 & rank < 21 ~ 5,
-                                rank >= 21 & rank < 25 ~ 6,
-                                rank >= 25 & rank < 29 ~ 7,
-                                rank >= 29 & rank < 33 ~ 8,
-                                rank >= 33 & rank < 37 ~ 9,
-                                rank >= 37 & rank < 41 ~ 10,
-                                rank >= 41 & rank < 45 ~ 11,
-                                rank >= 45 & rank < 49 ~ 12,
-                                rank >= 49 & rank < 53 ~ 13,
-                                rank >= 53 & rank < 57 ~ 14,
-                                rank >= 57 & rank < 61 ~ 15,
-                                rank >= 61 ~ 16))
-    }
-    
-    
-    data %>%
+    w_data %>%
+      filter(year == input$womens_year) %>%
+      select(-year) %>%
       gt() %>%
       text_transform(locations = cells_body(c(logo)),
                      fn = function(x)

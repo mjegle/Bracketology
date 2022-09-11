@@ -16,13 +16,13 @@ for (i in 2011:2022)
 # Grab the home team's first logo since there are times where a team has two different logos
 home_logos <- schedule %>%
   select(team = home.location, year, logo = home.logo) %>%
-  group_by(team, year) %>%
+  group_by(team) %>%
   summarize(logo = first(logo))
 
 # Same as above but for the away team
 away_logos <- schedule %>%
   select(team = away.location, year, logo = away.logo) %>%
-  group_by(team, year) %>%
+  group_by(team) %>%
   summarize(logo = first(logo))
 
 # Combine the two

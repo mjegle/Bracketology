@@ -15,12 +15,12 @@ for (i in 2014:2022)
 
 home_logos <- schedule %>%
   select(team = home_location, year, logo = home_logo) %>%
-  group_by(team, year) %>%
+  group_by(team) %>%
   summarize(logo = first(logo))
 
 away_logos <- schedule %>%
   select(team = away_location, year, logo = away_logo) %>%
-  group_by(team, year) %>%
+  group_by(team) %>%
   summarize(logo = first(logo))
 
 logos <- home_logos %>%
